@@ -8,11 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --check --ignore-path .gitignore .",
-    "format:fix": "prettier --write --ignore-path .gitignore ."
+    "format:fix": "prettier --write --ignore-path .gitignore .",
+    "pretty-quick": "pretty-quick"
   },
   "dependencies": {
-    "eslint": "8.42.0",
-    "eslint-config-next": "13.4.4",
     "ethers": "5.7.1",
     "moment": "^2.29.4",
     "next": "13.4.4",
@@ -21,6 +20,9 @@
     "react-query": "^3.39.3"
   },
   "devDependencies": {
-    "prettier": "^2.8.8"
+    "eslint": "8.42.0",
+    "eslint-config-next": "13.4.4",
+    "prettier": "^2.8.8",
+    "pretty-quick": "^3.1.3"
   }
 }
