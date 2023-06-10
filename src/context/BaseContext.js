@@ -28,7 +28,6 @@ init({
 export const BaseContext = createContext()
 
 export const BaseProvider = (props) => {
-  // init hooks
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
   const [{ connectedChain }] = useSetChain()
   const rpcUrl = getRpcUrl(connectedChain?.id)

@@ -35,3 +35,7 @@ export const formatWeiToDecimal = (weiString, decimal) => {
 export const formatDecimalToWei = (decimalString, decimal) => {
   return ethers.utils.parseUnits(decimalString, decimal).toString()
 }
+
+export const isValidAddress = (address) => {
+  return ethers.utils.isAddress(address)
+}
