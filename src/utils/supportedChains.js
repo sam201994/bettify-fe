@@ -14,3 +14,9 @@ export const chains = [
     rpcUrl: `https://goerli.infura.io/v3/${INFURA_KEY}`,
   },
 ]
+
+export const getRpcUrl = (network) => {
+  if (network === '0x5') return `https://goerli.infura.io/v3/${INFURA_KEY}`
+  if (network === '0x1') return `https://mainnet.infura.io/v3/${INFURA_KEY}`
+  return `https://mainnet.infura.io/v3/${INFURA_KEY}`
+}

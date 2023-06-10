@@ -1,3 +1,11 @@
+import { useTokenInputChange } from 'src/hooks'
+
 export default function Sample() {
-  return <div>Sample</div>
+  const [value, commifiedValue, onChangeValue] = useTokenInputChange()
+
+  return (
+    <div>
+      <input onChange={onChangeValue} value={commifiedValue} />
+    </div>
+  )
 }
