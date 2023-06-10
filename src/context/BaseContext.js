@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from 'react'
 import { init, useConnectWallet, useSetChain } from '@web3-onboard/react'
 import injectedModule from '@web3-onboard/injected-wallets'
-import { chains, getRpcUrl } from 'src/utils/supportedChains'
+import { chains, chainMapping } from 'src/utils/supportedChains'
 import { ethers } from 'ethers'
 
 const wallets = [injectedModule()]
@@ -30,7 +30,7 @@ export const BaseContext = createContext()
 export const BaseProvider = (props) => {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
   const [{ connectedChain }] = useSetChain()
-  const rpcUrl = getRpcUrl(connectedChain?.id)
+  const rpcUrl = chainMapping[connectedChain?.id || '0x1'].rpcUrl
   const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
 
   return (
