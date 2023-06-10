@@ -12,6 +12,8 @@
     "pretty-quick": "pretty-quick"
   },
   "dependencies": {
+    "@web3-onboard/injected-wallets": "^2.10.0",
+    "@web3-onboard/react": "^2.8.6",
     "ethers": "5.7.1",
     "moment": "^2.29.4",
     "next": "13.4.4",
