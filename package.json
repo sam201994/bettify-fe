@@ -11,6 +11,8 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@web3-onboard/injected-wallets": "^2.10.0",
+    "@web3-onboard/react": "^2.8.6",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4",
     "ethers": "5.7.1",
