@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { useQuery } from 'react-query'
+
 export const useGetTokenUSDPrices = (coinGeckoIds) => {
   return useQuery(coinGeckoIds, async () => {
     const config = {

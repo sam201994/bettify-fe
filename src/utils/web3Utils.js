@@ -1,4 +1,4 @@
-import { utils } from 'ethers'
+import { ethers, BigNumber, utils } from 'ethers'
 
 export const cleanNumberInput = (value, maxDecimals = 6) => {
   const numArr = String(value)

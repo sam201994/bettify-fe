@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { ethers } from 'ethers'
 import ERC20Artifact from 'src/abis/ERC20.json'
 import { BaseContext } from 'src/context/BaseContext'
 
@@ -7,7 +9,7 @@ const useGetBalances = () => {
   async function fetchEthBalance(walletAddress) {
     try {
       const balanceInWei = await provider.getBalance(walletAddress)
-      const balanceInEth = ethers.utils.formatEther(balance)
+      const balanceInEth = ethers.utils.formatEther(balanceInWei)
 
       return { balanceInWei, balanceInEth }
     } catch (error) {
@@ -22,8 +24,8 @@ const useGetBalances = () => {
         ERC20Artifact.abi,
         provider,
       )
-      const balanceInWei = await contract.getBalance(address)
-      const balanceInEth = ethers.utils.formatEther(balance)
+      const balanceInWei = await contract.getBalance(walletAddress)
+      const balanceInEth = ethers.utils.formatEther(balanceInWei)
       return { balanceInWei, balanceInEth }
     } catch (error) {
       console.error('Error fetching Token balance:', error)
@@ -33,4 +35,4 @@ const useGetBalances = () => {
   return { fetchEthBalance, fetchERC20TokenBalance }
 }
 
-export default useTokenInputChange
+export default useGetBalances

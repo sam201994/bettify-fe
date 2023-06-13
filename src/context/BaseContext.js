@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext } from 'react'
 import { init, useConnectWallet, useSetChain } from '@web3-onboard/react'
 import injectedModule from '@web3-onboard/injected-wallets'
 import { chains, chainMapping } from 'src/utils/supportedChains'
