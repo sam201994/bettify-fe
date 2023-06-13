@@ -1,7 +1,13 @@
+import BetCard from 'src/containers/BetCard'
+
 export default function Home() {
   return (
     <>
-      <div style={{ display: 'flex', gap: '2px' }}>Home</div>
+      <div style={{ display: 'flex', gap: '2px' }}>
+        <BetCard data={{}} isBetOpen={true} />
+        <BetCard data={{}} isBetLocked={true} />
+        <BetCard data={{}} />
+      </div>
       {/* <div>
         <input onChange={onChangeValue} value={commifiedValue} />
         <Typography type="p20" color="primary">
