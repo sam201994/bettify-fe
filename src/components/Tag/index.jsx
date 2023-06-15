@@ -1,5 +1,5 @@
+import Typography from 'src/components/Typography'
 import TagWrapper from './styles'
-import Typography from '../Typography'
 
 export default function Tag({ label, theme }) {
   return (

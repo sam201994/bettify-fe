@@ -1,14 +1,15 @@
 import styled from 'styled-components'
 import { colors } from 'src/utils/colors'
 
-export const CardWrapper = styled.div`
+export const BannerWrapper = styled.div`
   background: ${colors.secondary};
   border-radius: 12px;
-  padding: 20px;
+  padding: 40px;
   width: fit-content;
+  width: 100%;
 `
 
-export const CardInnerWrapper = styled.div`
+export const BannerInnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,7 +23,7 @@ export const CardInnerWrapper = styled.div`
       display: flex;
       justify-content: space-between;
       span:first-child {
-        width: 300px;
+        width: 250px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -55,6 +56,7 @@ export const DateWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 3px;
+    width: 175px;
   }
   .winner-section {
     display: flex;

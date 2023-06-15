@@ -1,8 +1,9 @@
 import { createContext } from 'react'
 import { init, useConnectWallet, useSetChain } from '@web3-onboard/react'
 import injectedModule from '@web3-onboard/injected-wallets'
-import { chains, chainMapping } from 'src/utils/supportedChains'
 import { ethers } from 'ethers'
+
+import { chains, chainMapping } from 'src/utils/supportedChains'
 
 const wallets = [injectedModule()]
 

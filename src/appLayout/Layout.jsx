@@ -1,6 +1,6 @@
 import Sidebar from './Sidebar'
-import { MainWrapper } from './styles'
 import Header from './Header'
+import { MainWrapper } from './styles'
 
 const Layout = ({ children }) => {
   return (

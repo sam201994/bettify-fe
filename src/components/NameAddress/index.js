@@ -1,6 +1,6 @@
 import { minifyAddress } from 'src/utils/web3Utils'
+import Typography from 'src/components/Typography'
 import { NameAddressWrapper, Gola } from './styles'
-import Typography from '../Typography'
 
 export default function NameAddress({
   imgSize,

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { cleanNumberInput, commifyNumber } from 'src/utils/web3Utils'
 
 const useTokenInputChange = (initialvalue = '', maxDecimals = 6) => {

@@ -13,11 +13,13 @@ export const SidebarWrapper = styled.div`
   overflow-y: auto;
 
   background-color: ${colors.secondary};
+  z-index: 4;
 `
 
 export const MainWrapper = styled.div`
-  width: 100vw-${SIDEBAR_WIDTH + 40}px;
-  margin-left: ${SIDEBAR_WIDTH + 40}px;
+  margin-left: ${SIDEBAR_WIDTH}px;
+  display: flex;
+  justify-content: space-between;
   margin-top: 60px;
 `
 
@@ -29,8 +31,35 @@ export const HeaderWrapper = styled.div`
   padding-left: ${SIDEBAR_WIDTH}px;
   padding-right: 40px;
   padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
   justify-content: flex-end;
   width: 100%;
   cursor: pointer;
+  background-color: ${colors.primary};
+  z-index: 3;
+`
+
+export const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 40px;
+  margin-right: 40px;
+  gap: 20px;
+`
+
+export const MenuWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-item: center;
+  padding-top: 45px;
+  gap: 20px;
+`
+
+export const MenuItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cusor: pointer;
 `

@@ -1,9 +1,9 @@
-import { DateWrapper } from './styles'
 import Typography from 'src/components/Typography'
 import NameAddress from 'src/components/NameAddress'
 import { commifyNumber } from 'src/utils/web3Utils'
+import { DateWrapper } from './styles'
 
-const DateBlock = ({ number = '52342342342341235413' }) => {
+const DateBlock = ({ number = '523' }) => {
   const winner = 'ola'
   return (
     <DateWrapper>

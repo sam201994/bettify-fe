@@ -14,7 +14,6 @@ export default function Typography({
   return (
     <TypographyWrapper
       fontSize={calculateFontSize(type)}
-      // lineheight={calculateLineHeight(type)}
       fontWeight={calculateFontWeight(type)}
       color={calculateFontColor(color)}
       style={customStyles}

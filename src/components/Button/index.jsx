@@ -1,4 +1,4 @@
-import Typography from '../Typography'
+import Typography from 'src/components/Typography'
 import { ButtonWrapper, IconButtonWrapper } from './styles'
 
 const Button = ({ disabled = false, loader = false, label, onClick }) => {

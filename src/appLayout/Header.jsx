@@ -1,12 +1,12 @@
+import { useState, useContext } from 'react'
 import Link from 'next/link'
-import { HeaderWrapper } from './styles'
-import NameAddress from 'src/components/NameAddress'
-import { useContext } from 'react'
+
 import { BaseContext } from 'src/context/BaseContext'
-import { ExpandMoreIcon, ExpandLessIcon } from 'src/components/Icons'
 import { colors } from 'src/utils/colors'
-import { useState } from 'react'
+import { ExpandMoreIcon, ExpandLessIcon } from 'src/components/Icons'
 import Typography from 'src/components/Typography'
+import NameAddress from 'src/components/NameAddress'
+import { HeaderWrapper } from './styles'
 
 const Header = () => {
   const { connect, connecting, account, disconnect, wallet } =

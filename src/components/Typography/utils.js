@@ -42,7 +42,7 @@ export function calculateFontWeight(type) {
   switch (type) {
     case 'p34':
       return '400'
-    case 'p2':
+    case 'p24':
       return '600'
     case 'p20':
       return '500'
