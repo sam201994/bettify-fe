@@ -9,4 +9,5 @@ export const colors = {
   default: '#161616',
   white: 'white',
   black: 'black',
+  dullGrey: '#beb9b963',
 }

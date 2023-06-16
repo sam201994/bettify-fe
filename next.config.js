@@ -4,6 +4,10 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    domains: ['storage.googleapis.com', 'coinpayments.net'],
+    minimumCacheTTL: 1500000,
+  },
 }
 
 module.exports = nextConfig
