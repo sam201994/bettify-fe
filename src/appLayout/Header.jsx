@@ -24,7 +24,7 @@ const Header = () => {
   if (wallet) {
     return (
       <HeaderWrapper>
-        <NameAddress imgSize={18} textSize="p12" address={''} />
+        <NameAddress imgSize={18} textSize="p12" address={'23423423423'} />
         <ExpandLessIcon sx={{ color: colors.white }} size="12" />
       </HeaderWrapper>
     )

@@ -11,7 +11,7 @@ init({
   wallets,
   chains,
   appMetadata: {
-    name: 'Dapp Boilerplate',
+    name: 'Safe Bet',
     icon: '<svg>Dapp Icon</svg>',
     description: 'A boilerplate for dapps.',
   },
