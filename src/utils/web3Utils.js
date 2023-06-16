@@ -39,3 +39,9 @@ export const formatDecimalToWei = (decimalString, decimal) => {
 export const isValidAddress = (address) => {
   return ethers.utils.isAddress(address)
 }
+
+export const getTicketIdFromPlaceBetReceipt = (receipt) => {
+  const { events } = receipt
+  const betPlacedEvent = events[events.length - 1]
+  return betPlacedEvent?.args?.tokenId?.toString()
+}
