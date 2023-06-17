@@ -10,10 +10,19 @@ import {
   TicketListWrapper,
   DividerWrapper,
 } from './styles'
+import { useModal } from 'src/hooks'
 
 export default function Home() {
   const isBetOpen = true
   const tickets = [1, 2, 3, 5, 6]
+
+  const { Modal, openModal } = useModal({ address: 12 }, 'PLACE_BET')
+
+  const handleOpenPlaceBet = (event) => {
+    event.stopPropagation()
+    openModal()
+  }
+
   return (
     <PageContainer id="ola1">
       <Header betName={'Bitcoin Prediction #34'} />
@@ -26,7 +35,7 @@ export default function Home() {
               Bets Placed
             </Typography>
             <div className="button-section">
-              <Button label="Place Bet" />
+              <Button label="Place Bet" onClick={handleOpenPlaceBet} />
             </div>
           </BetsPlacedHeaderWrapper>
           <TicketListWrapper>
@@ -41,6 +50,7 @@ export default function Home() {
           </TicketListWrapper>
         </TicketContainerWrapper>
       </div>
+      <Modal />
     </PageContainer>
   )
 }

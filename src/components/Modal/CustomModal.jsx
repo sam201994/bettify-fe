@@ -7,7 +7,10 @@ import { DialogWrapper } from './styles'
 const CustomModal = ({ showModal, setShowModal, title, children }) => {
   return (
     <Dialog
-      onClose={() => setShowModal(false)}
+      onClose={(event) => {
+        event.stopPropagation()
+        setShowModal(false)
+      }}
       open={showModal}
       PaperProps={{
         style: { background: 'none' },
