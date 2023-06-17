@@ -5,8 +5,29 @@ import Button from 'src/components/Button'
 import CustomModal from './CustomModal'
 import { GuessInput } from 'src/components/FormFields'
 import { PlaceBetWrapper } from './styles'
+import { useGame } from 'src/hooks'
+import { useContext } from 'react'
+import { BaseContext } from 'src/context/BaseContext'
 
-const PlaceBetModal = ({ showModal, setShowModal }) => {
+const PlaceBetModal = ({ showModal, setShowModal, data }) => {
+  const [guess, setGuess] = useState(null)
+  const { placeBet } = useGame(data.proxyAddress)
+  const { allBets, betsLoading } = useContext(BaseContext)
+  const currentBet = allBets.find(
+    (bet) => bet.proxyAddress === data.proxyAddress,
+  )
+
+  const handleGuessChange = (event) => {
+    event.preventDefault()
+    setGuess(event.target.value)
+  }
+
+  const handlePlaceBet = async (event) => {
+    event.preventDefault()
+    const stakeAmount = currentBet.stakeAmount
+    await placeBet(guess, stakeAmount)
+  }
+
   return (
     <CustomModal
       showModal={showModal}
@@ -14,8 +35,8 @@ const PlaceBetModal = ({ showModal, setShowModal }) => {
       title={'Place bet'}
     >
       <PlaceBetWrapper>
-        <GuessInput value={'0.1'} onChange={() => {}} />
-        <Button label="Place Bet" />
+        <GuessInput value={guess} onChange={handleGuessChange} />
+        <Button label="Place Bet" onClick={handlePlaceBet} />
       </PlaceBetWrapper>
     </CustomModal>
   )

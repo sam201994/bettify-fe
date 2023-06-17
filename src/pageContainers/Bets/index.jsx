@@ -13,7 +13,7 @@ export default function Bets() {
   console.log({ allBets, betsLoading })
 
   const handleOnClickBet = (bet) => {
-    router.push(`/bets/${bet.id}`)
+    router.push(`/bets/${bet.proxyAddress}`)
   }
 
   if (!allBets) return null
@@ -26,7 +26,9 @@ export default function Bets() {
           <CardListWrapper id="ola2">
             {allBets.map((bet) => {
               return (
-                <BetCard data={bet} key={bet.id} onClick={handleOnClickBet} />
+                <div onClick={() => handleOnClickBet(bet)} key={bet.id}>
+                  <BetCard data={bet} />
+                </div>
               )
             })}
           </CardListWrapper>

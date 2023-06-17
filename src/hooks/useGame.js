@@ -5,8 +5,10 @@ import { getTicketIdFromPlaceBetReceipt } from 'src/utils/web3Utils'
 const useGame = (proxyAddress) => {
   const [ProxyContract] = useContract(proxyAddress, Implementation.abi)
 
-  const placeBet = async (bet) => {
-    const tx = await ProxyContract.placeBet(bet)
+  const placeBet = async (bet, betAmount) => {
+    const tx = await ProxyContract.placeBet(bet, {
+      value: betAmount.toString(),
+    })
     const receipt = await tx.wait()
     const tokenId = getTicketIdFromPlaceBetReceipt(receipt)
     return tokenId
@@ -49,7 +51,6 @@ const useGame = (proxyAddress) => {
     placeBet,
     withdrawFunds,
     findWinner,
-    createBet,
     getWinner,
     mockFindWinner,
   }

@@ -4,7 +4,7 @@ import injectedModule from '@web3-onboard/injected-wallets'
 import { ethers } from 'ethers'
 
 import { chains, chainMapping } from 'src/utils/supportedChains'
-import { useGetAllBets } from 'src/queries'
+import { useGetAllProxies } from 'src/queries'
 
 const wallets = [injectedModule()]
 
@@ -34,7 +34,7 @@ export const BaseProvider = (props) => {
   const [{ connectedChain }, setChain] = useSetChain()
   const [provider, setProvider] = useState(null)
 
-  const { data: allBets, isLoading: betsLoading } = useGetAllBets()
+  const { data: allBets, isLoading: betsLoading } = useGetAllProxies()
 
   useEffect(() => {
     if (!wallet?.provider) {

@@ -13,11 +13,11 @@ import {
 import { useModal } from 'src/hooks'
 import Fallback from 'src/components/Fallback'
 
-export default function Home() {
+export default function Home({ proxyAddress }) {
   const isBetOpen = true
   const tickets = [1, 2, 3, 5, 6]
 
-  const { Modal, openModal } = useModal({ address: 12 }, 'PLACE_BET')
+  const { Modal, openModal } = useModal({ proxyAddress }, 'PLACE_BET')
 
   const handleOpenPlaceBet = (event) => {
     event.stopPropagation()
