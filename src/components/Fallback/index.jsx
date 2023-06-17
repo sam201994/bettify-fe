@@ -13,7 +13,7 @@ const Fallback = ({ children }) => {
         <Typography type="p24" color="darkGrey">
           Connect wallet to display data
         </Typography>
-        <ButtonWrapper onClick={connect}>
+        <ButtonWrapper onClick={() => connect()}>
           <Typography type="p16" color="black">
             Connect wallet
           </Typography>
@@ -34,7 +34,7 @@ const Fallback = ({ children }) => {
       </FallbackWrapper>
     )
 
-  return children
+  return <>{children}</>
 }
 
 export default Fallback
