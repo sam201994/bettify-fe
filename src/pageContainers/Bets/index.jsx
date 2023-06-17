@@ -16,6 +16,8 @@ export default function Bets() {
     router.push(`/bets/${bet.id}`)
   }
 
+  if (!allBets) return null
+
   return (
     <PageContainer id="ola1">
       <Header />

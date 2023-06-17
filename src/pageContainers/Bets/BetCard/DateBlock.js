@@ -2,33 +2,20 @@ import Typography from 'src/components/Typography'
 import NameAddress from 'src/components/NameAddress'
 import { commifyNumber } from 'src/utils/web3Utils'
 import { DateWrapper } from './styles'
+import { getBetDateData } from 'src/utils/web3Utils'
 
-const DateBlock = ({ number = '523' }) => {
-  const winner = 'ola'
+const DateBlock = ({ data, status }) => {
+  const { label, date } = getBetDateData(data, status)
+
   return (
     <DateWrapper>
       <div className="date-section">
-        <Typography type="p14" color="white">
-          {number === 0
-            ? `0 bet placed`
-            : `${commifyNumber(number)} bets placed`}
+        <Typography type="p12" color="lightGrey">
+          {label}
         </Typography>
         <Typography type="p12" color="lightGrey">
-          12th Sep, 2012 - 12th Sep, 2012
+          {date}
         </Typography>
-        <Typography type="p12" color="lightGrey">
-          20th Sep, 2012 - 12th Sep, 2012
-        </Typography>
-      </div>
-      <div className="winner-section">
-        {winner && (
-          <>
-            <Typography type="p14" color="white">
-              Winner
-            </Typography>
-            <NameAddress imgSize={14} textSize={'p12'} />
-          </>
-        )}
       </div>
     </DateWrapper>
   )

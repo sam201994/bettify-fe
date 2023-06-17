@@ -1,4 +1,5 @@
 import { ethers, BigNumber, utils } from 'ethers'
+import moment from 'moment'
 
 export const cleanNumberInput = (value, maxDecimals = 6) => {
   const numArr = String(value)
@@ -71,4 +72,34 @@ export const parseProxyCreatedEvent = (event) => {
     stakeAmount: stakeAmount.toString(),
   }
   return result
+}
+
+export const getBetStatus = ({
+  startTime,
+  bettingPeriodEndsAt,
+  lockInPeriodEndsAt,
+}) => {
+  const currentTime = Date.now() / 1000
+  if (currentTime < bettingPeriodEndsAt) {
+    return { status: 'BET_OPEN', color: 'green' }
+  }
+  if (currentTime < lockInPeriodEndsAt) {
+    return { status: 'BET_LOCKED', color: 'orange' }
+  }
+  return { status: 'BET_CLOSED', color: 'red' }
+}
+
+export const getBetDateData = (data, status) => {
+  const bettingPeriodEndsAt = moment(
+    parseInt(data.bettingPeriodEndsAt) * 1000,
+  ).format('MMM DD, YYYY')
+  const lockInPeriodEndsAt = moment(
+    parseInt(data.lockInPeriodEndsAt) * 1000,
+  ).format('MMM DD, YYYY')
+
+  if (status === 'BET_OPEN')
+    return { label: 'Betting period ends on', date: bettingPeriodEndsAt }
+  if (status === 'BET_LOCKED')
+    return { label: 'Lockin period ends on', date: lockInPeriodEndsAt }
+  return { label: 'bet ended on:', date: lockInPeriodEndsAt }
 }

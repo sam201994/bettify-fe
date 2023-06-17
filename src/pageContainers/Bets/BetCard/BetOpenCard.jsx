@@ -5,10 +5,10 @@ import Button from 'src/components/Button'
 import DateBlock from './DateBlock'
 import { CardInnerWrapper } from './styles'
 import { useModal } from 'src/hooks'
+import NameAddress from 'src/components/NameAddress'
 
-const BetOpenCard = ({ data }) => {
+const BetOpenCard = ({ data, status }) => {
   const tags = ['my bet', 'participated']
-  const betName = '#34 Bitcoin Prediction'
 
   const { Modal, openModal } = useModal(data, 'PLACE_BET')
 
@@ -22,9 +22,11 @@ const BetOpenCard = ({ data }) => {
       <CardInnerWrapper>
         <div className="top-section">
           <div className="title-section">
-            <Typography type="p20" color="white">
-              {betName}
-            </Typography>
+            <NameAddress
+              address={data.proxyAddress}
+              imgSize={20}
+              textSize={18}
+            />
             <Status color="green" />
           </div>
 

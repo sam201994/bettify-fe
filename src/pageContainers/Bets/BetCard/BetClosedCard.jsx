@@ -5,22 +5,27 @@ import Button from 'src/components/Button'
 import DateBlock from './DateBlock'
 import { CardInnerWrapper } from './styles'
 import { useModal } from 'src/hooks'
+import NameAddress from 'src/components/NameAddress'
 
-const BetClosedCard = ({ data }) => {
+const BetClosedCard = ({ data, status }) => {
   const tags = ['my bet', 'participated']
   const { Modal, openModal } = useModal(data, 'DECLARE_WINNER')
   const handleOpenDeclareWinner = (event) => {
     event.stopPropagation()
     openModal()
   }
+
   return (
     <>
       <CardInnerWrapper>
         <div className="top-section">
           <div className="title-section">
-            <Typography type="p20" color="white" style={{ width: 250 }}>
-              #34 Bitcoin Prediction
-            </Typography>
+            <NameAddress
+              address={data.proxyAddress}
+              imgSize={20}
+              textSize={'p20'}
+            />
+
             <Status color="red" />
           </div>
 
