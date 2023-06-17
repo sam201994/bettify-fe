@@ -9,7 +9,7 @@ export default function NameAddress({
 }) {
   return (
     <NameAddressWrapper>
-      <Gola color="lightGrey" imgSize={imgSize} />
+      <Gola color="lightGrey" width={imgSize} />
       <Typography type={textSize} color="white">
         {minifyAddress(address)}
       </Typography>

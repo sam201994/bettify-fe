@@ -4,7 +4,7 @@ import { ButtonWrapper, IconButtonWrapper } from './styles'
 const Button = ({ disabled = false, loader = false, label, onClick }) => {
   if (loader) {
     return (
-      <ButtonWrapper disabled={disabled} loader={loader}>
+      <ButtonWrapper disabled={disabled || loader}>
         <Typography type="p14" color="white">
           Loding ...
         </Typography>
@@ -13,8 +13,7 @@ const Button = ({ disabled = false, loader = false, label, onClick }) => {
   }
   return (
     <ButtonWrapper
-      disabled={disabled}
-      loader={loader}
+      disabled={disabled || loader}
       onClick={disabled ? () => {} : onClick}
     >
       <Typography type="p14" color="white">
@@ -26,10 +25,14 @@ const Button = ({ disabled = false, loader = false, label, onClick }) => {
 
 export const IconButton = ({ children, onClick, loader = false }) => {
   if (loader) {
-    return <IconButtonWrapper loader={loader}>{children}</IconButtonWrapper>
+    return (
+      <IconButtonWrapper disabled={disabled || loader}>
+        {children}
+      </IconButtonWrapper>
+    )
   }
   return (
-    <IconButtonWrapper loader={loader} onClick={onClick}>
+    <IconButtonWrapper disabled={disabled || loader} onClick={onClick}>
       {children}
     </IconButtonWrapper>
   )

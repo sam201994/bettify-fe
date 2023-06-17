@@ -5,8 +5,8 @@ import { colors } from 'src/utils/colors'
 export const Gola = styled.div`
   background-color: ${(props) => colors[props.color]};
   border-radius: 100%;
-  width: ${(props) => `${props.imgSize}px`};
-  height: ${(props) => `${props.imgSize}px`};
+  width: ${(props) => `${props.width}px`};
+  height: ${(props) => `${props.width}px`};
   display: flex;
 `
 
