@@ -92,10 +92,10 @@ export const getBetStatus = ({
 export const getBetDateData = (data, status) => {
   const bettingPeriodEndsAt = moment(
     parseInt(data.bettingPeriodEndsAt) * 1000,
-  ).format('MMM DD, YYYY')
+  ).format('MMM DD, YYYY: h:mm A')
   const lockInPeriodEndsAt = moment(
     parseInt(data.lockInPeriodEndsAt) * 1000,
-  ).format('MMM DD, YYYY')
+  ).format('MMM DD, YYYY: h:mm A')
 
   if (status === 'BET_OPEN')
     return { label: 'Betting period ends on', date: bettingPeriodEndsAt }
