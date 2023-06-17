@@ -1,7 +1,7 @@
 import TableCell, { tableCellClasses } from '@mui/material/TableCell'
 import { styled } from '@mui/material/styles'
 import TableRow from '@mui/material/TableRow'
-import {colors} from 'src/utils/colors';
+import { colors } from 'src/utils/colors'
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -19,5 +19,4 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
   // },
   backgroundColor: colors.secondary,
   // hide last border
-
 }))

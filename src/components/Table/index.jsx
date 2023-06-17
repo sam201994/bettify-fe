@@ -6,22 +6,27 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 
-import CustomCell from "./CustomCell";
-import {StyledTableRow, StyledTableCell} from './styles';
-
-
+import CustomCell from './CustomCell'
+import { StyledTableRow, StyledTableCell } from './styles'
 
 export const CustomTableRow = ({ headers, row }) => {
   return (
     <StyledTableRow key={row.name}>
       {headers.map((header) => {
-        return <CustomCell type={header.type} data={row[header.id]} align={header.align}/>
+        return (
+          <CustomCell
+            key={header.id}
+            type={header.type}
+            data={row[header.id]}
+            align={header.align}
+          />
+        )
       })}
     </StyledTableRow>
   )
 }
 
-export default function CustomizedTables({headers, rows}) {
+export default function CustomizedTables({ headers, rows }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -37,8 +42,12 @@ export default function CustomizedTables({headers, rows}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <CustomTableRow headers={headers} row={row} />
+          {rows.map((row, index) => (
+            <CustomTableRow
+              headers={headers}
+              row={row}
+              key={`table-${index}`}
+            />
           ))}
         </TableBody>
       </Table>

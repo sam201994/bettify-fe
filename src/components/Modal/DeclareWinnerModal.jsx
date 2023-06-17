@@ -5,26 +5,29 @@ import Image from 'next/image'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 import CustomModal from './CustomModal'
-import { WithdrawBetBodyWrapper } from './styles'
+import { DeclareWinnerWrapper } from './styles'
 
-const DeclareWinnerModal = ({ showModal, setShowModal }) => {
+const DeclareWinnerModal = ({ showModal, setShowModal, data }) => {
   return (
     <CustomModal
       showModal={showModal}
       setShowModal={setShowModal}
       title={`Declare winner ${'\u00A0'.repeat(2)}   #23`}
-      Footer={<Button label="Declare Winner" />}
-      Body={
-        <WithdrawBetBodyWrapper>
+    >
+      <DeclareWinnerWrapper>
+        <div className="top-section">
           <Typography type="p14" color="lightGrey">
             Guess Bet: $23423.23423
           </Typography>
           <Typography type="p14" color="lightGrey">
             Staked amount: $1 ETH
           </Typography>
-        </WithdrawBetBodyWrapper>
-      }
-    />
+        </div>
+        <div className="footer-section">
+          <Button label="Declare Winner" />
+        </div>
+      </DeclareWinnerWrapper>
+    </CustomModal>
   )
 }
 

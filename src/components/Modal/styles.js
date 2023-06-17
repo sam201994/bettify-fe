@@ -9,48 +9,46 @@ export const DialogWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 50px;
-  min-width: 400px;
 `
+/* ------ CUSTOM WRAPPERS ------ */
 
-// Place bet Modal
-
-export const InputWrapper = styled.div`
+export const CreateBetWrapper = styled.div`
   display: flex;
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid ${colors.dullGrey};
-
-  justify-content: space-between;
-  .left-section {
+  flex-direction: column;
+  gap: 40px;
+  .top-section {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    justify-content: space-between;
+    gap: 20px;
   }
-  .right-section {
+  .section-1 {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-`
-export const TextInput = styled.input`
-  width: 100%;
-  background: none;
-  border: none;
-  border: 0;
-  color: white;
-  font-size: 24px;
-  font-weight: 500;
-  &::placeholder {
-    color: ${colors.dullGrey};
-  }
-
-  &:focus {
-    outline: none;
+    gap: 20px;
   }
 `
 
-export const WithdrawBetBodyWrapper = styled.div``
+export const DeclareWinnerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  .top-section {
+    display: flex;
+    flex-direction: column;
+  }
+`
+
+export const WithdrawBetWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  .top-section {
+    display: flex;
+    flex-direction: column;
+  }
+`
+
+export const PlaceBetWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`

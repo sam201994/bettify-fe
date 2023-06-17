@@ -1,8 +1,8 @@
-import { useContract } from 'src/hooks/useContract'
+import { useContract } from 'src/hooks'
 import Implementation from 'src/abis/Implementation.json'
 import { getTicketIdFromPlaceBetReceipt } from 'src/utils/web3Utils'
 
-export const useGame = (proxyAddress) => {
+const useGame = (proxyAddress) => {
   const ProxyContract = useContract(proxyAddress, Implementation.abi)
 
   const placeBet = async (bet) => {
@@ -54,3 +54,5 @@ export const useGame = (proxyAddress) => {
     mockFindWinner,
   }
 }
+
+export default useGame

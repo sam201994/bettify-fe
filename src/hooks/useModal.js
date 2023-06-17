@@ -1,37 +1,63 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react'
+import {
+  PlaceBetModal,
+  CreateBetModal,
+  DeclareWinnerModal,
+  WithdrawBetModal,
+} from 'src/components/Modal'
 
-// const useModal = (type) => {
-//   const [isModalOpen, setModalOpen] = useState(false);
+const useModal = (data, type) => {
+  const [isModalOpen, setModalOpen] = useState(false)
 
-//   const openModal = () => {
-//     setModalOpen(true);
-//   };
+  const openModal = () => {
+    setModalOpen(true)
+  }
 
-//   const closeModal = () => {
-//     setModalOpen(false);
-//   };
+  const closeModal = () => {
+    setModalOpen(false)
+  }
 
-//   const renderModalType = () => {
-//   	if(type === "PLACE_BET")
-//   		return <PlaceBetModal />
+  const renderModalType = () => {
+    if (type === 'PLACE_BET')
+      return (
+        <PlaceBetModal
+          showModal={isModalOpen}
+          setShowModal={setModalOpen}
+          data={data}
+        />
+      )
 
-//   	return <ModalK />
+    if (type === 'CREATE_BET')
+      return (
+        <CreateBetModal
+          showModal={isModalOpen}
+          setShowModal={setModalOpen}
+          data={data}
+        />
+      )
+    if (type === 'DECLARE_WINNER')
+      return (
+        <DeclareWinnerModal
+          showModal={isModalOpen}
+          setShowModal={setModalOpen}
+          data={data}
+        />
+      )
+    if (type === 'WITHDRAW_BET')
+      return (
+        <WithdrawBetModal
+          showModal={isModalOpen}
+          setShowModal={setModalOpen}
+          data={data}
+        />
+      )
+  }
 
-//   }
+  const Modal = () => {
+    return <>{isModalOpen && <div>{renderModalType()}</div>}</>
+  }
 
-//   const Modal = ({ children }) => {
-//     return (
-//       <>
-//         {isModalOpen && (
-//           <Modal>
-//           	{renderModalType()}
-//           </Modal>
-//         )}
-//       </>
-//     );
-//   };
+  return { openModal, closeModal, Modal, isModalOpen }
+}
 
-//   return { openModal, closeModal, Modal };
-// };
-
-// export default useModal;
+export default useModal

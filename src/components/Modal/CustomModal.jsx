@@ -4,8 +4,7 @@ import Dialog from '@mui/material/Dialog'
 import Typography from 'src/components/Typography'
 import { DialogWrapper } from './styles'
 
-// input size -20
-const CustomModal = ({ showModal, setShowModal, title, Footer, Body }) => {
+const CustomModal = ({ showModal, setShowModal, title, children }) => {
   return (
     <Dialog
       onClose={() => setShowModal(false)}
@@ -15,7 +14,7 @@ const CustomModal = ({ showModal, setShowModal, title, Footer, Body }) => {
       }}
     >
       <DialogWrapper>
-        <div className="top-section">
+        <div className="dialog-title">
           <Typography
             type="p24"
             color="white"
@@ -23,9 +22,8 @@ const CustomModal = ({ showModal, setShowModal, title, Footer, Body }) => {
           >
             {title}
           </Typography>
-          {Body}
         </div>
-        <div className="bottom-section">{Footer}</div>
+        <div className="dialog-body">{children}</div>
       </DialogWrapper>
     </Dialog>
   )

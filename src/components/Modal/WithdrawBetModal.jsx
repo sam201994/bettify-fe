@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 import CustomModal from './CustomModal'
-import { WithdrawBetBodyWrapper } from './styles'
+import { WithdrawBetWrapper } from './styles'
 
 const WithdrawBetModal = ({ showModal, setShowModal }) => {
   return (
@@ -13,18 +13,21 @@ const WithdrawBetModal = ({ showModal, setShowModal }) => {
       showModal={showModal}
       setShowModal={setShowModal}
       title={`Withdraw bet ${'\u00A0'.repeat(2)}  #23`}
-      Footer={<Button label="Withdraw Bet" />}
-      Body={
-        <WithdrawBetBodyWrapper>
+    >
+      <WithdrawBetWrapper>
+        <div className="top-section">
           <Typography type="p14" color="lightGrey">
             Guess Bet: $23423.23423
           </Typography>
           <Typography type="p14" color="lightGrey">
             Staked amount: $1 ETH
           </Typography>
-        </WithdrawBetBodyWrapper>
-      }
-    />
+        </div>
+        <div className="footer-section">
+          <Button label="Withdraw Bet" />
+        </div>
+      </WithdrawBetWrapper>
+    </CustomModal>
   )
 }
 

@@ -1,38 +1,20 @@
+import { useState } from 'react'
 import { PageContainer } from 'src/appLayout/styles'
 import { CardListWrapper } from 'src/components/CardStyles'
 import CreateBetCard from './CreateBetCard'
 import Header from './Header'
+import { FACTORY_CONTRACTS } from 'src/utils/contracts'
 
 export default function CreateBet() {
   return (
-    <PageContainer id="ola1">
+    <PageContainer>
       <Header />
 
       <div>
-        <CardListWrapper id="ola2">
-          <CreateBetCard
-            gameName="Bitcoin Prediction"
-            description="It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          />
-          <CreateBetCard
-            gameName="Bitcoin Prediction"
-            description="It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          />
-
-          <CreateBetCard
-            gameName="Bitcoin Prediction"
-            description="It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          />
-
-          <CreateBetCard
-            gameName="Bitcoin Prediction"
-            description="It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          />
-
-          <CreateBetCard
-            gameName="Bitcoin Prediction"
-            description="It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          />
+        <CardListWrapper>
+          {Object.values(FACTORY_CONTRACTS).map((fc) => {
+            return <CreateBetCard data={fc} key={fc.type} />
+          })}
         </CardListWrapper>
       </div>
     </PageContainer>

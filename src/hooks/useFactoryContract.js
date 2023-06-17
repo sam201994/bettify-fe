@@ -1,7 +1,8 @@
-import { useContract } from './useContract'
+import { useContract } from 'src/hooks'
 import { FACTORY_CONTRACTS } from 'src/utils/contracts'
+import { getProxyAddressFromReceipt } from 'src/utils/web3Utils'
 
-export const useFactoryContract = (type) => {
+const useFactoryContract = (type) => {
   const { address, abi } = FACTORY_CONTRACTS[type]
   const FactoryContract = useContract(address, abi)
 
@@ -16,12 +17,12 @@ export const useFactoryContract = (type) => {
       stakeAmountInWei,
     )
     const receipt = await tx.wait()
-    return receipt
+    return getProxyAddressFromReceipt(receipt)
   }
-
-  // TODO: write a function to get all the instances of the proxy contracts created by the factory contract using the event logs from the factory contract
 
   return {
     createBet,
   }
 }
+
+export default useFactoryContract

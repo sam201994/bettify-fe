@@ -9,7 +9,8 @@ const TableCell = ({ data, type, align }) => {
       </StyledTableCell>
     )
 
-  if (type === 'TEXT') return <StyledTableCell align={align}>{data}</StyledTableCell>
+  if (type === 'TEXT')
+    return <StyledTableCell align={align}>{data}</StyledTableCell>
   if (type === 'NAME_ADDRESS')
     return (
       <StyledTableCell align={align}>

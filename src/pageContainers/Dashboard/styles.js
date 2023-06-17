@@ -24,32 +24,26 @@ export const LeftSectionWrapper = styled.div`
 
   gap: 20px;
   .stats-section-1 {
-  	display: flex;
-  	gap: 20px;
+    display: flex;
+    gap: 20px;
   }
   .stats-section-2 {
-  	display: flex;
-  	flex-direction: column;
-  	gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
-
 `
 
 export const StatsCardWrapper = styled.div`
-  background: #E2972F;
+  background: #e2972f;
   border-radius: 8px;
   padding: 20px;
   width: 100%;
   flex: 1;
-
-
 `
 
 export const TableWrapper = styled.div`
   background: ${colors.secondary};
   border-radius: 8px;
   padding: 20px;
-  
-
-
 `

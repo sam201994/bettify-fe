@@ -45,3 +45,9 @@ export const getTicketIdFromPlaceBetReceipt = (receipt) => {
   const betPlacedEvent = events[events.length - 1]
   return betPlacedEvent?.args?.tokenId?.toString()
 }
+
+export const getProxyAddressFromReceipt = (receipt) => {
+  const { events } = receipt
+  const ProxyCreated = events[events.length - 1]
+  return ProxyCreated?.args?.proxy
+}
