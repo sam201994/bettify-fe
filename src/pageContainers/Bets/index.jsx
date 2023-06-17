@@ -4,6 +4,7 @@ import { PageContainer } from 'src/appLayout/styles'
 import { CardListWrapper } from 'src/components/CardStyles'
 import BetCard from './BetCard'
 import Header from './Header'
+import Fallback from 'src/components/Fallback'
 
 const bets = [
   {
@@ -48,16 +49,17 @@ export default function Bets() {
   return (
     <PageContainer id="ola1">
       <Header />
-
-      <div>
-        <CardListWrapper id="ola2">
-          {bets.map((bet) => {
-            return (
-              <BetCard data={bet} key={bet.id} onClick={handleOnClickBet} />
-            )
-          })}
-        </CardListWrapper>
-      </div>
+      <Fallback>
+        <div>
+          <CardListWrapper id="ola2">
+            {bets.map((bet) => {
+              return (
+                <BetCard data={bet} key={bet.id} onClick={handleOnClickBet} />
+              )
+            })}
+          </CardListWrapper>
+        </div>
+      </Fallback>
     </PageContainer>
   )
 }

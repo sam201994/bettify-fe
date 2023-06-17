@@ -3,6 +3,7 @@ import Header from './Header'
 import Table from 'src/components/Table'
 import StatsCard from './StatsCard'
 import { BodyWrapper, LeftSectionWrapper, TableWrapper } from './styles'
+import Fallback from 'src/components/Fallback'
 
 const headers = [
   {
@@ -133,10 +134,12 @@ export default function Home() {
   return (
     <PageContainer id="ola1">
       <Header />
-      <BodyWrapper>
-        <LeftSection />
-        <RightSection />
-      </BodyWrapper>
+      <Fallback>
+        <BodyWrapper>
+          <LeftSection />
+          <RightSection />
+        </BodyWrapper>
+      </Fallback>
     </PageContainer>
   )
 }

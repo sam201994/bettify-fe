@@ -30,7 +30,7 @@ export const BaseContext = createContext()
 
 export const BaseProvider = (props) => {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
-  const [{ connectedChain }] = useSetChain()
+  const [{ connectedChain }, setChain] = useSetChain()
   const [provider, setProvider] = useState(null)
 
   // initialize provider without wallet using ethers
@@ -50,6 +50,10 @@ export const BaseProvider = (props) => {
     }
   }, [wallet])
 
+  const handleChangeChain = () => {
+    setChain({ chainId: '0x5' })
+  }
+
   return (
     <BaseContext.Provider
       value={{
@@ -59,8 +63,10 @@ export const BaseProvider = (props) => {
         disconnect,
         connecting,
         connectedChain: parseInt(connectedChain?.id, 16),
+        chainNotSupported: connectedChain?.id !== '0x5',
         provider: providerwithoutWallet,
         signer: provider?.getSigner(),
+        handleChangeChain,
       }}
     >
       {props.children}

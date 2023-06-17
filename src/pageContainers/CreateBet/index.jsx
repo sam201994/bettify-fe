@@ -4,19 +4,21 @@ import { CardListWrapper } from 'src/components/CardStyles'
 import CreateBetCard from './CreateBetCard'
 import Header from './Header'
 import { FACTORY_CONTRACTS } from 'src/utils/contracts'
+import Fallback from 'src/components/Fallback'
 
 export default function CreateBet() {
   return (
     <PageContainer>
       <Header />
-
-      <div>
-        <CardListWrapper>
-          {Object.values(FACTORY_CONTRACTS).map((fc) => {
-            return <CreateBetCard data={fc} key={fc.type} />
-          })}
-        </CardListWrapper>
-      </div>
+      <Fallback>
+        <div>
+          <CardListWrapper>
+            {Object.values(FACTORY_CONTRACTS).map((fc) => {
+              return <CreateBetCard data={fc} key={fc.type} />
+            })}
+          </CardListWrapper>
+        </div>
+      </Fallback>
     </PageContainer>
   )
 }

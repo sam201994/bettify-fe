@@ -14,7 +14,6 @@ export const CardInnerWrapper = styled.div`
 
 export const BodyWrapper = styled.div`
   display: flex;
-  // flex-direction: column;
   gap: 20px;
 `
 

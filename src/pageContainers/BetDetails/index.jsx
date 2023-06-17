@@ -11,6 +11,7 @@ import {
   DividerWrapper,
 } from './styles'
 import { useModal } from 'src/hooks'
+import Fallback from 'src/components/Fallback'
 
 export default function Home() {
   const isBetOpen = true
@@ -26,30 +27,31 @@ export default function Home() {
   return (
     <PageContainer id="ola1">
       <Header betName={'Bitcoin Prediction #34'} />
-
-      <div>
-        <BetDetailsBanner data={{}} isBetOpen={isBetOpen} />
-        <TicketContainerWrapper>
-          <BetsPlacedHeaderWrapper>
-            <Typography type="p24" color="white">
-              Bets Placed
-            </Typography>
-            <div className="button-section">
-              <Button label="Place Bet" onClick={handleOpenPlaceBet} />
-            </div>
-          </BetsPlacedHeaderWrapper>
-          <TicketListWrapper>
-            {tickets.map((ticket, index) => {
-              return (
-                <>
-                  <TicketCard />
-                  {tickets.length - 1 === index ? null : <DividerWrapper />}
-                </>
-              )
-            })}
-          </TicketListWrapper>
-        </TicketContainerWrapper>
-      </div>
+      <Fallback>
+        <div>
+          <BetDetailsBanner data={{}} isBetOpen={isBetOpen} />
+          <TicketContainerWrapper>
+            <BetsPlacedHeaderWrapper>
+              <Typography type="p24" color="white">
+                Bets Placed
+              </Typography>
+              <div className="button-section">
+                <Button label="Place Bet" onClick={handleOpenPlaceBet} />
+              </div>
+            </BetsPlacedHeaderWrapper>
+            <TicketListWrapper>
+              {tickets.map((ticket, index) => {
+                return (
+                  <>
+                    <TicketCard />
+                    {tickets.length - 1 === index ? null : <DividerWrapper />}
+                  </>
+                )
+              })}
+            </TicketListWrapper>
+          </TicketContainerWrapper>
+        </div>
+      </Fallback>
       <Modal />
     </PageContainer>
   )
