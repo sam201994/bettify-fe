@@ -3,7 +3,7 @@ import Implementation from 'src/abis/Implementation.json'
 import { getTicketIdFromPlaceBetReceipt } from 'src/utils/web3Utils'
 
 const useGame = (proxyAddress) => {
-  const ProxyContract = useContract(proxyAddress, Implementation.abi)
+  const [ProxyContract] = useContract(proxyAddress, Implementation.abi)
 
   const placeBet = async (bet) => {
     const tx = await ProxyContract.placeBet(bet)

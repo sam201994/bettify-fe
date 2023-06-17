@@ -4,6 +4,7 @@ import injectedModule from '@web3-onboard/injected-wallets'
 import { ethers } from 'ethers'
 
 import { chains, chainMapping } from 'src/utils/supportedChains'
+import { useGetAllBets } from 'src/queries'
 
 const wallets = [injectedModule()]
 
@@ -33,10 +34,7 @@ export const BaseProvider = (props) => {
   const [{ connectedChain }, setChain] = useSetChain()
   const [provider, setProvider] = useState(null)
 
-  // initialize provider without wallet using ethers
-  const providerwithoutWallet = new ethers.providers.JsonRpcProvider(
-    process.env.NEXT_PUBLIC_INFURA_KEY,
-  )
+  const { data: allBets, isLoading: betsLoading } = useGetAllBets()
 
   useEffect(() => {
     if (!wallet?.provider) {
@@ -64,9 +62,11 @@ export const BaseProvider = (props) => {
         connecting,
         connectedChain: parseInt(connectedChain?.id, 16),
         chainNotSupported: connectedChain?.id !== '0x5',
-        provider: providerwithoutWallet,
+        provider,
         signer: provider?.getSigner(),
         handleChangeChain,
+        allBets,
+        betsLoading,
       }}
     >
       {props.children}

@@ -14,7 +14,7 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
   const [bettingPeriod, setBetting] = useState('')
   const [lockinPeriod, setLockinPeriod] = useState('')
   const [stakeAmount, setStakeAmount] = useState('')
-  const { createBet } = useFactoryContract(data.type)
+  const { createBet, getAllEvents } = useFactoryContract(data.address)
 
   const handleOnChange = (event) => {
     setStakeAmount(event.target.value)
@@ -23,14 +23,15 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
   const handleCreateBet = async (data) => {
     try {
       const bettingExpiration =
-        Math.floor(Date.now() / 1000) + 60 * 60 * 24 * bettingPeriod // 7 days
-      const lockInPeriodEnd = bettingExpiration + 60 * 60 * 24 * lockinPeriod // 7 days
+        Math.floor(Date.now() / 1000) + 60 * 60 * 24 * bettingPeriod
+      const lockInPeriodEnd = bettingExpiration + 60 * 60 * 24 * lockinPeriod
 
       const proxyAddress = await createBet(
         bettingExpiration,
         lockInPeriodEnd,
         parseEther(stakeAmount),
       )
+      console.log({ proxyAddress })
     } catch (err) {
       console.log(err)
     }

@@ -51,3 +51,24 @@ export const getProxyAddressFromReceipt = (receipt) => {
   const ProxyCreated = events[events.length - 1]
   return ProxyCreated?.args?.proxy
 }
+
+export const parseProxyCreatedEvent = (event) => {
+  const { args } = event
+  const [
+    proxy,
+    ownerAddress,
+    createdAt,
+    bettingPeriodEndsAt,
+    lockInPeriodEndsAt,
+    stakeAmount,
+  ] = args
+  const result = {
+    proxyAddress: proxy,
+    ownerAddress: ownerAddress,
+    createdAt: createdAt.toString(),
+    lockInPeriodEndsAt: lockInPeriodEndsAt.toString(),
+    bettingPeriodEndsAt: bettingPeriodEndsAt.toString(),
+    stakeAmount: stakeAmount.toString(),
+  }
+  return result
+}
