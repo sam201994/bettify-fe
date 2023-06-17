@@ -5,7 +5,11 @@ const Button = ({ disabled = false, loader = false, label, onClick }) => {
   if (loader) {
     return (
       <ButtonWrapper disabled={disabled || loader}>
-        <Typography type="p14" color="white">
+        <Typography
+          type="p14"
+          color="white"
+          customStyles={{ justifyContent: 'center' }}
+        >
           Loding ...
         </Typography>
       </ButtonWrapper>
@@ -16,7 +20,11 @@ const Button = ({ disabled = false, loader = false, label, onClick }) => {
       disabled={disabled || loader}
       onClick={disabled ? () => {} : onClick}
     >
-      <Typography type="p14" color="white">
+      <Typography
+        type="p14"
+        color="white"
+        customStyles={{ justifyContent: 'center' }}
+      >
         {label}
       </Typography>
     </ButtonWrapper>

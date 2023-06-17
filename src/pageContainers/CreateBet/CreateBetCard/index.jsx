@@ -12,11 +12,11 @@ const CreateBetCard = ({ data }) => {
       <CardWrapper>
         <CardInnerWrapper>
           <div>
-            <Typography type="p34" color="white">
+            <Typography type="p24" color="lightGrey">
               {data.name}
             </Typography>
 
-            <Typography type="p12" color="white">
+            <Typography type="p12" color="lightGrey">
               {data.description}
             </Typography>
           </div>
