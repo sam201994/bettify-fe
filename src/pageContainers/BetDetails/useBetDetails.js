@@ -5,7 +5,8 @@ import { useGetAllBetsOfAProxy } from 'src/queries'
 const useBetsDetails = (address) => {
   const { allProxies, proxiesLoading } = useContext(BaseContext)
 
-  const { data: allBets, isLoading: betsLoading } = useGetAllBetsOfAProxy()
+  const { data: allBets, isLoading: betsLoading } =
+    useGetAllBetsOfAProxy(address)
 
   console.log({ allBets })
 

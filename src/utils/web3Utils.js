@@ -82,6 +82,17 @@ export const parseProxyCreatedEvent = (event) => {
   return result
 }
 
+export const parseBetPlacedEvent = (event) => {
+  const { args } = event
+  const [, user, guess, tokenId] = args
+  const result = {
+    userAddress: user,
+    guess: guess.toString(),
+    tokenId: tokenId.toString(),
+  }
+  return result
+}
+
 export const getBetStatus = ({ bettingPeriodEndsAt, lockInPeriodEndsAt }) => {
   const currentTime = Date.now() / 1000
   if (currentTime < bettingPeriodEndsAt) {

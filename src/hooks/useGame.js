@@ -15,7 +15,7 @@ const useGame = (proxyAddress) => {
   }
 
   const withdrawFunds = async (ticketId) => {
-    const tx = await ProxyContract.withdrawFunds(ticketId)
+    const tx = await ProxyContract.withdrawFunds(+ticketId)
     const receipt = await tx.wait()
     return receipt
   }

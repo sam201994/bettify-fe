@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
-import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 import CustomModal from './CustomModal'
 import { GuessInput } from 'src/components/FormFields'
@@ -9,16 +7,15 @@ import { useGame, useGetBalances } from 'src/hooks'
 import { useContext } from 'react'
 import { BaseContext } from 'src/context/BaseContext'
 import { useFormik } from 'formik'
-import { extractNaturalNumber, extractDecimalNumber } from 'src/utils/web3Utils'
-import { utils } from 'ethers'
+import { extractNaturalNumber } from 'src/utils/web3Utils'
+import { useQueryClient } from 'react-query'
 
 const PlaceBetModal = ({ showModal, setShowModal, data }) => {
   const { account } = useContext(BaseContext)
-
+  const queryClient = useQueryClient()
   const { fetchEthBalance } = useGetBalances()
   const { placeBet } = useGame(data.proxyAddress)
   const [loading, setLoading] = useState(false)
-
   const [walletEthBalance, setWalletEthBalance] = useState(0)
 
   useEffect(() => {
@@ -47,7 +44,7 @@ const PlaceBetModal = ({ showModal, setShowModal, data }) => {
       try {
         event.preventDefault()
         await placeBet(values.guess, data.stakeAmount)
-        // queryClient.invalidateQueries('allProxies')
+        queryClient.invalidateQueries('allBets')
       } catch (err) {
         console.log(err)
       } finally {
@@ -62,7 +59,7 @@ const PlaceBetModal = ({ showModal, setShowModal, data }) => {
       const num = extractNaturalNumber(value)
       setFieldValue(name, num)
     } else {
-      setFieldValue(name, num)
+      setFieldValue(name, value)
     }
   }
 
@@ -87,6 +84,7 @@ const PlaceBetModal = ({ showModal, setShowModal, data }) => {
           label="Place Bet"
           onClick={handleSubmit}
           disabled={Object.keys(errors).length > 0}
+          loader={loading}
         />
       </PlaceBetWrapper>
     </CustomModal>

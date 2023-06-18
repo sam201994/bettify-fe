@@ -49,7 +49,12 @@ const Header = () => {
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
-          <NameAddress imgSize={18} textSize="p12" address={account} />
+          <NameAddress
+            isOnClick={false}
+            imgSize={18}
+            textSize="p12"
+            address={account}
+          />
           {open ? (
             <ExpandLessIcon sx={{ color: colors.lightGrey }} size="12" />
           ) : (
@@ -64,11 +69,28 @@ const Header = () => {
           MenuListProps={{
             'aria-labelledby': 'basic-button',
           }}
+          sx={{
+            '& .MuiPaper-root': {
+              backgroundColor: colors.secondary,
+              borderRadius: '8px',
+            },
+            '& .MuiList-root': {
+              padding: '0',
+            },
+          }}
         >
           <MenuItem
             sx={{
               '&:hover': {
-                backgroundColor: colors.lightGrey,
+                backgroundColor: colors.lightBlack,
+              },
+              backgroundColor: 'inherit',
+              color: colors.lightGrey,
+              fontSize: '14px',
+              // color: 'inherit' when selected
+              "&[aria-selected='true']": {
+                backgroundColor: 'inherit',
+                color: 'inherit',
               },
             }}
             onClick={handleDisconnect}

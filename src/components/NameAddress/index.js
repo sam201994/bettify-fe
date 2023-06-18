@@ -7,6 +7,7 @@ export default function NameAddress({
   imgSize,
   textSize,
   address = '0xa234bF5AcC3B150907704ce26D855A5638dEF890',
+  isOnClick = true,
 }) {
   const icon = createIcon({
     // All options are optional
@@ -18,10 +19,14 @@ export default function NameAddress({
 
   return (
     <NameAddressWrapper
-      onClick={(event) => {
-        event.stopPropagation()
-        window.open(`https://goerli.etherscan.io/address/${address}`)
-      }}
+      onClick={
+        isOnClick
+          ? (event) => {
+              event.stopPropagation()
+              window.open(`https://goerli.etherscan.io/address/${address}`)
+            }
+          : () => {}
+      }
     >
       <img
         src={icon}

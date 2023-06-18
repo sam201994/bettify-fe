@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
-import Dialog from '@mui/material/Dialog'
-import Image from 'next/image'
-
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
+import { useGame } from 'src/hooks'
 import CustomModal from './CustomModal'
 import { WithdrawBetWrapper } from './styles'
+import { formatEther } from 'ethers/lib/utils'
 
-const WithdrawBetModal = ({ showModal, setShowModal }) => {
+const WithdrawBetModal = ({ showModal, setShowModal, data }) => {
+  const { stakeAmount, guess, tokenId, proxyAddress } = data
+
+  const { withdrawFunds } = useGame(proxyAddress)
+
+  const handleWithdrawBet = async () => {
+    try {
+      await withdrawFunds(tokenId)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <CustomModal
       showModal={showModal}
@@ -17,14 +27,14 @@ const WithdrawBetModal = ({ showModal, setShowModal }) => {
       <WithdrawBetWrapper>
         <div className="top-section">
           <Typography type="p14" color="lightGrey">
-            Guess Bet: $23423.23423
+            Guess Bet: ${guess}
           </Typography>
           <Typography type="p14" color="lightGrey">
-            Staked amount: $1 ETH
+            Staked amount: ${formatEther(stakeAmount)} ETH
           </Typography>
         </div>
         <div className="footer-section">
-          <Button label="Withdraw Bet" />
+          <Button label="Withdraw Bet" onClick={handleWithdrawBet} />
         </div>
       </WithdrawBetWrapper>
     </CustomModal>

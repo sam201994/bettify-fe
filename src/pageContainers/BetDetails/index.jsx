@@ -19,8 +19,6 @@ export default function BetDetails({ proxyAddress }) {
   const { loading, proxyData, betsLoading, allBets } =
     useBetDetails(proxyAddress)
 
-  const tickets = [1, 2, 3, 5, 6]
-
   const { Modal, openModal } = useModal(proxyData, 'PLACE_BET')
 
   const handleOpenPlaceBet = (event) => {
@@ -50,11 +48,11 @@ export default function BetDetails({ proxyAddress }) {
             </div>
           </BetsPlacedHeaderWrapper>
           <TicketListWrapper>
-            {tickets.map((ticket, index) => {
+            {allBets?.map((bet, index) => {
               return (
-                <div key={ticket}>
-                  <TicketCard />
-                  {tickets.length - 1 === index ? null : <DividerWrapper />}
+                <div key={bet.tokenId}>
+                  <TicketCard data={bet} stakeAmount={proxyData.stakeAmount} />
+                  {allBets.length - 1 === index ? null : <DividerWrapper />}
                 </div>
               )
             })}
