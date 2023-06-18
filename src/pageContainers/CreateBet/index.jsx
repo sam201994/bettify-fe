@@ -7,14 +7,12 @@ import { FACTORY_CONTRACTS } from 'src/utils/contracts'
 import Fallback from 'src/components/Fallback'
 
 export default function CreateBet() {
-  const k = Object.values(FACTORY_CONTRACTS)
-  const l = [...k, ...k, ...k]
   return (
     <PageContainer>
       <Header />
       <Fallback>
         <CardListWrapper>
-          {l.map((fc) => {
+          {Object.values(FACTORY_CONTRACTS).map((fc) => {
             return <CreateBetCard data={fc} key={fc.type} />
           })}
         </CardListWrapper>
