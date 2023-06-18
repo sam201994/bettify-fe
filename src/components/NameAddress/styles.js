@@ -13,7 +13,7 @@ export const Gola = styled.div`
 export const NameAddressWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   span {
     align-items: center;
     display: flex;
