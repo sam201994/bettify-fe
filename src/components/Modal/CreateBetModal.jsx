@@ -11,10 +11,12 @@ import { parseEther } from 'ethers/lib/utils'
 import { TextField } from 'src/components/FormFields'
 import { useFormik } from 'formik'
 import { extractNaturalNumber, extractDecimalNumber } from 'src/utils/web3Utils'
+import { useQueryClient } from 'react-query'
 
 const CreateBetModal = ({ showModal, setShowModal, data }) => {
   const { createBet, getAllEvents } = useFactoryContract(data.address)
   const [loading, setLoading] = useState(false)
+  const queryClient = useQueryClient()
 
   const { values, errors, handleSubmit, touched, setFieldValue } = useFormik({
     initialValues: {
@@ -52,6 +54,7 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
           lockInPeriodEnd,
           parseEther(values.stakeAmount),
         )
+        queryClient.invalidateQueries('allBets')
       } catch (err) {
         console.log(err)
       } finally {
