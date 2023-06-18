@@ -26,17 +26,13 @@ const CustomTextField = styled(TextField)({
 
 const TextFieldCustom = ({
   required,
-  id,
   label,
-  defaultValue = '',
   ...props
 }) => {
   return (
     <CustomTextField
       required={required}
-      id={id}
       label={label}
-      defaultValue={defaultValue}
       {...props}
     />
   )

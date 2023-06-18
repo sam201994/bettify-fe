@@ -1,7 +1,7 @@
 import { ethers, BigNumber, utils } from 'ethers'
 import moment from 'moment'
 
-export const cleanNumberInput = (value, maxDecimals = 6) => {
+export const extractDecimalNumber = (value, maxDecimals = 6) => {
   const numArr = String(value)
     .replace(/[^0-9.]/g, '')
     .split('.')
@@ -9,6 +9,14 @@ export const cleanNumberInput = (value, maxDecimals = 6) => {
   const decimalPart = numArr[1] || ''
   const dot = String(value).includes('.') ? '.' : ''
   return wholePart + dot + decimalPart.slice(0, maxDecimals)
+}
+
+export const extractNaturalNumber = (value) => {
+  const numArr = String(value)
+    .replace(/[^0-9.]/g, '')
+    .split('.')
+  const wholePart = numArr[0] || ''
+  return wholePart
 }
 
 export const commifyNumber = (value) => {

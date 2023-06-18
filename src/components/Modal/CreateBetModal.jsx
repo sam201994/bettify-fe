@@ -9,31 +9,63 @@ import { CreateBetWrapper } from './styles'
 import { useFactoryContract } from 'src/hooks'
 import { parseEther } from 'ethers/lib/utils'
 import { TextField } from 'src/components/FormFields'
+import { useFormik } from 'formik'
+import { extractNaturalNumber, extractDecimalNumber } from 'src/utils/web3Utils'
 
 const CreateBetModal = ({ showModal, setShowModal, data }) => {
-  const [bettingPeriod, setBetting] = useState('')
-  const [lockinPeriod, setLockinPeriod] = useState('')
-  const [stakeAmount, setStakeAmount] = useState('')
   const { createBet, getAllEvents } = useFactoryContract(data.address)
 
-  const handleOnChange = (event) => {
-    setStakeAmount(event.target.value)
-  }
+  const { values, errors, handleSubmit, touched, setFieldValue } = useFormik({
+    initialValues: {
+      bettingPeriod: '',
+      lockinPeriod: '',
+      stakeAmount: '',
+    },
+    validate: (values) => {
+      const errors = {}
 
-  const handleCreateBet = async (data) => {
-    try {
-      const bettingExpiration =
-        Math.floor(Date.now() / 1000) + 60 * 60 * 24 * bettingPeriod
-      const lockInPeriodEnd = bettingExpiration + 60 * 60 * 24 * lockinPeriod
+      if (!values.bettingPeriod) {
+        errors.bettingPeriod = true
+      }
+      if (!values.lockinPeriod) {
+        errors.lockinPeriod = true
+      }
+      if (!values.stakeAmount) {
+        errors.stakeAmount = true
+      }
 
-      const proxyAddress = await createBet(
-        bettingExpiration,
-        lockInPeriodEnd,
-        parseEther(stakeAmount),
-      )
-      console.log({ proxyAddress })
-    } catch (err) {
-      console.log(err)
+      return errors
+    },
+
+    onSubmit: async (values) => {
+      try {
+        const bettingExpiration =
+          Math.floor(Date.now() / 1000) +
+          60 * 60 * 24 * parseInt(values.bettingPeriod)
+        const lockInPeriodEnd =
+          bettingExpiration + 60 * 60 * 24 * parseInt(values.lockinPeriod)
+
+        const proxyAddress = await createBet(
+          bettingExpiration,
+          lockInPeriodEnd,
+          parseEther(values.stakeAmount),
+        )
+      } catch (err) {
+        console.log(err)
+      }
+    },
+  })
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    if (name === 'bettingPeriod' || name === 'lockinPeriod') {
+      const num = extractNaturalNumber(value)
+      setFieldValue(name, num)
+    } else if (name === 'stakeAmount') {
+      const num = extractDecimalNumber(value, 18)
+      setFieldValue(name, num)
+    } else {
+      setFieldValue(name, num)
     }
   }
 
@@ -48,18 +80,23 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
           <div className="section-1">
             <TextField
               required={true}
-              label="Betting period"
+              label="Betting period (days)"
               fullWidth
-              value={bettingPeriod}
-              onChange={() => setBetting(event.target.value)}
+              name="bettingPeriod"
+              id="bettingPeriod"
+              value={values.bettingPeriod}
+              onChange={handleChange}
+              error={touched.bettingPeriod && errors.bettingPeriod}
             />
 
             <TextField
               required={true}
-              label="Lockin period"
+              label="Lockin period (days)"
               fullWidth
-              value={lockinPeriod}
-              onChange={() => setLockinPeriod(event.target.value)}
+              name="lockinPeriod"
+              value={values.lockinPeriod}
+              onChange={handleChange}
+              error={touched.lockinPeriod && errors.lockinPeriod}
             />
           </div>
           <div className="section-2">
@@ -67,14 +104,16 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
               required={true}
               label="Stake amount (ETH)"
               fullWidth
-              value={stakeAmount}
-              onChange={handleOnChange}
+              name="stakeAmount"
+              value={values.stakeAmount}
+              onChange={handleChange}
+              error={touched.stakeAmount && errors.stakeAmount}
             />
           </div>
         </div>
 
         <div className="footer-section">
-          <Button label="Create bet" onClick={handleCreateBet} />
+          <Button label="Create bet" onClick={handleSubmit} />
         </div>
       </CreateBetWrapper>
     </CustomModal>
