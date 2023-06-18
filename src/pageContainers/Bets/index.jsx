@@ -11,7 +11,6 @@ import Placeholder from 'src/components/Placeholder'
 export default function Bets() {
   const router = useRouter()
   const { allProxies, proxiesLoading } = useContext(BaseContext)
-  console.log({ allProxies, proxiesLoading })
 
   const handleOnClickBet = (bet) => {
     router.push(`/bets/${bet.proxyAddress}`)

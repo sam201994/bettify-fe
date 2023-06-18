@@ -27,7 +27,6 @@ const BetCard = ({ data }) => {
   })
 
   const { dateLabel, date } = getBetDateData(data, status)
-  // console.log(data, account)
   const tags =
     getAddress(account) === getAddress(data.ownerAddress) ? ['my bet'] : []
 

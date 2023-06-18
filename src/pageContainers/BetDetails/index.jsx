@@ -17,29 +17,17 @@ import { useRouter } from 'next/router'
 import { BaseContext } from 'src/context/BaseContext'
 import { useContext, useState, useEffect } from 'react'
 import { useGetAllBetsOfAProxy } from 'src/queries'
+import useBetDetails from './useBetDetails'
 
 export default function BetDetails() {
   const router = useRouter()
+
   const { address } = router.query
-
-  // useEffect(() => {
-  //   if (!wallet?.provider) {
-  //     setProvider(null)
-  //   } else {
-  //     const webProvider = new ethers.providers.Web3Provider(
-  //       wallet.provider,
-  //       'any',
-  //     )
-  //     setProvider(webProvider)
-  //   }
-  // }, [wallet])
-
-  const { allProxies, proxiesLoading } = useContext(BaseContext)
-  const data = allProxies?.find((bet) => bet.proxyAddress === address)
+  const { loading, proxyData, betsLoading, allBets } = useBetDetails(address)
 
   const tickets = [1, 2, 3, 5, 6]
 
-  const { Modal, openModal } = useModal(data, 'PLACE_BET')
+  const { Modal, openModal } = useModal(proxyData, 'PLACE_BET')
 
   const handleOpenPlaceBet = (event) => {
     event.stopPropagation()
@@ -47,8 +35,8 @@ export default function BetDetails() {
   }
 
   const renderData = () => {
-    if (proxiesLoading) return <Placeholder label1="loading bets..." />
-    if (!data)
+    if (loading) return <Placeholder label1="loading bets..." />
+    if (!proxyData)
       return (
         <Placeholder
           label1="No data"
@@ -57,7 +45,7 @@ export default function BetDetails() {
       )
     return (
       <div>
-        <BetDetailsBanner data={data} />
+        <BetDetailsBanner data={proxyData} />
         <TicketContainerWrapper>
           <BetsPlacedHeaderWrapper>
             <Typography type="p24" color="white">
@@ -68,14 +56,14 @@ export default function BetDetails() {
             </div>
           </BetsPlacedHeaderWrapper>
           <TicketListWrapper>
-            {tickets.map((ticket, index) => {
+            {/*{tickets.map((ticket, index) => {
               return (
                 <div key={ticket}>
                   <TicketCard />
                   {tickets.length - 1 === index ? null : <DividerWrapper />}
                 </div>
               )
-            })}
+            })}*/}
           </TicketListWrapper>
         </TicketContainerWrapper>
       </div>
@@ -84,7 +72,7 @@ export default function BetDetails() {
 
   return (
     <PageContainer>
-      <Header betName={data?.factoryName} />
+      <Header betName={proxyData?.factoryName} />
       <Fallback>{renderData()}</Fallback>
       <Modal />
     </PageContainer>
