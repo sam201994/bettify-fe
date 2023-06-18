@@ -6,34 +6,78 @@ import { colors } from 'src/utils/colors'
 import { ExpandMoreIcon, ExpandLessIcon } from 'src/components/Icons'
 import Typography from 'src/components/Typography'
 import NameAddress from 'src/components/NameAddress'
-import { HeaderWrapper } from './styles'
+import { HeaderWrapper, ConnectWrapper } from './styles'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 
 const Header = () => {
   const { connect, connecting, account, disconnect, wallet } =
     useContext(BaseContext)
-  const [expand, setExpand] = useState(false)
+
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    // disconnect()
+    setAnchorEl(null)
+  }
+
   if (connecting) {
     return (
       <HeaderWrapper>
-        <Typography type="p12" color="white">
-          connecting...
-        </Typography>
+        <ConnectWrapper>
+          <Typography type="p12" color="white">
+            connecting...
+          </Typography>
+        </ConnectWrapper>
       </HeaderWrapper>
     )
   }
   if (wallet) {
     return (
-      <HeaderWrapper>
-        <NameAddress imgSize={18} textSize="p12" address={'23423423423'} />
-        <ExpandLessIcon sx={{ color: colors.white }} size="12" />
-      </HeaderWrapper>
+      <div>
+        <HeaderWrapper onClick={handleClick}>
+          <ConnectWrapper>
+            <NameAddress imgSize={18} textSize="p12" address={account} />
+            {open ? (
+              <ExpandLessIcon sx={{ color: colors.lightGrey }} size="12" />
+            ) : (
+              <ExpandMoreIcon sx={{ color: colors.lightGrey }} size="12" />
+            )}
+          </ConnectWrapper>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem
+              sx={{
+                backgroundColor: `${colors.secondary}`,
+                color: `${colors.secondary}`,
+              }}
+              onClick={handleClose}
+            >
+              Disconnect
+            </MenuItem>
+          </Menu>
+        </HeaderWrapper>
+      </div>
     )
   }
   return (
     <HeaderWrapper onClick={() => connect()}>
-      <Typography type="p12" color="white">
-        Connect Wallet
-      </Typography>
+      <ConnectWrapper>
+        <Typography type="p12" color="white">
+          Connect Wallet
+        </Typography>
+      </ConnectWrapper>
     </HeaderWrapper>
   )
 }

@@ -2,15 +2,18 @@
 // import BetLockedCard from './BetLockedCard'
 // import BetClosedCard from './BetClosedCard'
 
-import { CardWrapper } from 'src/components/CardStyles'
-import { getBetStatus, formatWeiToDecimal } from 'src/utils/web3Utils'
+// import { CardWrapper } from 'src/components/CardStyles'
+import {
+  getBetStatus,
+  formatWeiToDecimal,
+  getBetDateData,
+} from 'src/utils/web3Utils'
 
 import Tag from 'src/components/Tag'
 import Status from 'src/components/Status'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
-import DateBlock from './DateBlock'
-import { CardInnerWrapper } from './styles'
+import { CardWrapper, CardInnerWrapper, DateWrapper } from './styles'
 import { useModal } from 'src/hooks'
 import NameAddress from 'src/components/NameAddress'
 
@@ -21,6 +24,7 @@ const BetCard = ({ data, onClick }) => {
     bettingPeriodEndsAt,
     lockInPeriodEndsAt,
   })
+  const { dateLabel, date } = getBetDateData(data, status)
 
   const tags = []
 
@@ -51,10 +55,16 @@ const BetCard = ({ data, onClick }) => {
             {`Stake amount: ${formatWeiToDecimal(data.stakeAmount)} ETH`}
           </Typography>
 
-          <DateBlock
-            data={{ startTime, bettingPeriodEndsAt, lockInPeriodEndsAt }}
-            status={status}
-          />
+          <DateWrapper>
+            <div className="date-section">
+              <Typography type="p12" color="lightGrey">
+                {dateLabel}
+              </Typography>
+              <Typography type="p12" color="lightGrey">
+                {date}
+              </Typography>
+            </div>
+          </DateWrapper>
         </div>
       </CardInnerWrapper>
     </CardWrapper>

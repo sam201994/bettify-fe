@@ -98,8 +98,8 @@ export const getBetDateData = (data, status) => {
   ).format('MMM DD, YYYY: h:mm A')
 
   if (status === 'BET_OPEN')
-    return { label: 'Betting period ends on', date: bettingPeriodEndsAt }
+    return { dateLabel: 'Betting period ends on', date: bettingPeriodEndsAt }
   if (status === 'BET_LOCKED')
-    return { label: 'Lockin period ends on', date: lockInPeriodEndsAt }
-  return { label: 'bet ended on:', date: lockInPeriodEndsAt }
+    return { dateLabel: 'Lockin period ends on', date: lockInPeriodEndsAt }
+  return { dateLabel: 'bet ended on:', date: lockInPeriodEndsAt }
 }

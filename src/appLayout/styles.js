@@ -40,6 +40,11 @@ export const HeaderWrapper = styled.div`
   z-index: 3;
 `
 
+export const ConnectWrapper = styled.div`
+  display: flex;
+  gap: 5px;
+`
+
 export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,7 +1,6 @@
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
-import { CardWrapper } from 'src/components/CardStyles'
-import { CardInnerWrapper } from './styles'
+import { CardInnerWrapper, CardWrapper } from './styles'
 import { useModal } from 'src/hooks'
 
 const CreateBetCard = ({ data }) => {
