@@ -24,18 +24,8 @@ const CustomTextField = styled(TextField)({
   },
 })
 
-const TextFieldCustom = ({
-  required,
-  label,
-  ...props
-}) => {
-  return (
-    <CustomTextField
-      required={required}
-      label={label}
-      {...props}
-    />
-  )
+const TextFieldCustom = ({ required, label, ...props }) => {
+  return <CustomTextField required={required} label={label} {...props} />
 }
 
 export default TextFieldCustom

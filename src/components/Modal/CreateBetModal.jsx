@@ -14,6 +14,7 @@ import { extractNaturalNumber, extractDecimalNumber } from 'src/utils/web3Utils'
 
 const CreateBetModal = ({ showModal, setShowModal, data }) => {
   const { createBet, getAllEvents } = useFactoryContract(data.address)
+  const [loading, setLoading] = useState(false)
 
   const { values, errors, handleSubmit, touched, setFieldValue } = useFormik({
     initialValues: {
@@ -38,6 +39,7 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
     },
 
     onSubmit: async (values) => {
+      setLoading(true)
       try {
         const bettingExpiration =
           Math.floor(Date.now() / 1000) +
@@ -52,6 +54,8 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
         )
       } catch (err) {
         console.log(err)
+      } finally {
+        setLoading(false)
       }
     },
   })
@@ -113,7 +117,7 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
         </div>
 
         <div className="footer-section">
-          <Button label="Create bet" onClick={handleSubmit} />
+          <Button label="Create bet" onClick={handleSubmit} loader={loading} />
         </div>
       </CreateBetWrapper>
     </CustomModal>

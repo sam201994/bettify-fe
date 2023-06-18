@@ -10,4 +10,5 @@ export const colors = {
   white: 'white',
   black: 'black',
   dullGrey: '#beb9b963',
+  lightBlack: '#131111',
 }

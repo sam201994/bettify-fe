@@ -1,8 +1,8 @@
 import Typography from 'src/components/Typography'
-import { ButtonWrapper, IconButtonWrapper } from './styles'
+import { ButtonWrapper } from './styles'
 
 const Button = ({ disabled = false, loader = false, label, onClick }) => {
-  if (loader) {
+  if (loader || disabled) {
     return (
       <ButtonWrapper disabled={disabled || loader}>
         <Typography
@@ -10,16 +10,13 @@ const Button = ({ disabled = false, loader = false, label, onClick }) => {
           color="white"
           customStyles={{ justifyContent: 'center' }}
         >
-          Loding ...
+          {loader ? `Loding ...` : label}
         </Typography>
       </ButtonWrapper>
     )
   }
   return (
-    <ButtonWrapper
-      disabled={disabled || loader}
-      onClick={disabled ? () => {} : onClick}
-    >
+    <ButtonWrapper onClick={onClick}>
       <Typography
         type="p14"
         color="white"
@@ -28,21 +25,6 @@ const Button = ({ disabled = false, loader = false, label, onClick }) => {
         {label}
       </Typography>
     </ButtonWrapper>
-  )
-}
-
-export const IconButton = ({ children, onClick, loader = false }) => {
-  if (loader) {
-    return (
-      <IconButtonWrapper disabled={disabled || loader}>
-        {children}
-      </IconButtonWrapper>
-    )
-  }
-  return (
-    <IconButtonWrapper disabled={disabled || loader} onClick={onClick}>
-      {children}
-    </IconButtonWrapper>
   )
 }
 
