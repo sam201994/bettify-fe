@@ -50,7 +50,14 @@ const TextInput = styled.input`
   }
 `
 
-const GuessInput = ({ betData, value, onChange, ...props }) => {
+const GuessInput = ({
+  walletEthBalance,
+  betData,
+  value,
+  onChange,
+  ...props
+}) => {
+  console.log({ err: props.error })
   return (
     <InputWrapper>
       <div className="left-section">
@@ -67,7 +74,9 @@ const GuessInput = ({ betData, value, onChange, ...props }) => {
           alt="Picture of the author"
         />
         <Typography type="p14" color="lightGrey">
-          0.0453 ETH Balance
+          {`${
+            walletEthBalance ? (+walletEthBalance).toFixed(6) : 'loading...'
+          } ETH`}
         </Typography>
       </div>
     </InputWrapper>

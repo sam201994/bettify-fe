@@ -56,10 +56,10 @@ export default function BetDetails() {
           <TicketListWrapper>
             {tickets.map((ticket, index) => {
               return (
-                <>
+                <div key={ticket}>
                   <TicketCard />
                   {tickets.length - 1 === index ? null : <DividerWrapper />}
-                </>
+                </div>
               )
             })}
           </TicketListWrapper>

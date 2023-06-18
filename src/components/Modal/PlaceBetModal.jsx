@@ -1,19 +1,31 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 import CustomModal from './CustomModal'
 import { GuessInput } from 'src/components/FormFields'
 import { PlaceBetWrapper } from './styles'
-import { useGame } from 'src/hooks'
+import { useGame, useGetBalances } from 'src/hooks'
 import { useContext } from 'react'
 import { BaseContext } from 'src/context/BaseContext'
 import { useFormik } from 'formik'
 import { extractNaturalNumber, extractDecimalNumber } from 'src/utils/web3Utils'
+import { utils } from 'ethers'
 
 const PlaceBetModal = ({ showModal, setShowModal, data }) => {
+  const { account } = useContext(BaseContext)
+
+  const { fetchEthBalance } = useGetBalances()
   const { placeBet } = useGame(data.proxyAddress)
   const [loading, setLoading] = useState(false)
+
+  const [walletEthBalance, setWalletEthBalance] = useState(0)
+
+  useEffect(() => {
+    fetchEthBalance(account).then((balance) => {
+      setWalletEthBalance(balance)
+    })
+  }, [])
 
   const { values, errors, handleSubmit, touched, setFieldValue } = useFormik({
     initialValues: {
@@ -21,11 +33,12 @@ const PlaceBetModal = ({ showModal, setShowModal, data }) => {
     },
     validate: (values) => {
       const errors = {}
-
       if (!values.guess) {
         errors.guess = true
       }
-
+      if (+walletEthBalance.balanceInWei < +data.stakeAmount) {
+        errors.guess = true
+      }
       return errors
     },
 
@@ -33,8 +46,7 @@ const PlaceBetModal = ({ showModal, setShowModal, data }) => {
       setLoading(true)
       try {
         event.preventDefault()
-        const stakeAmount = data.stakeAmount
-        await placeBet(guess, stakeAmount)
+        await placeBet(values.guess, data.stakeAmount)
         // queryClient.invalidateQueries('allProxies')
       } catch (err) {
         console.log(err)
@@ -69,8 +81,13 @@ const PlaceBetModal = ({ showModal, setShowModal, data }) => {
           value={values.guess}
           name="guess"
           onChange={handleChange}
+          walletEthBalance={walletEthBalance?.balanceInEth}
         />
-        <Button label="Place Bet" onClick={handleSubmit} />
+        <Button
+          label="Place Bet"
+          onClick={handleSubmit}
+          disabled={Object.keys(errors).length > 0}
+        />
       </PlaceBetWrapper>
     </CustomModal>
   )
