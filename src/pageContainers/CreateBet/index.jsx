@@ -1,10 +1,9 @@
-import { useState } from 'react'
 import { PageContainer } from 'src/appLayout/styles'
-import { CardListWrapper } from './styles'
-import CreateBetCard from './CreateBetCard'
-import Header from './Header'
 import { FACTORY_CONTRACTS } from 'src/utils/contracts'
 import Fallback from 'src/components/Fallback'
+import CreateBetCard from './CreateBetCard'
+import Header from './Header'
+import { CardListWrapper } from './styles'
 
 export default function CreateBet() {
   return (

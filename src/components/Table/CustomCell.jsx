@@ -1,5 +1,5 @@
 import NameAddress from 'src/components/NameAddress'
-import { StyledTableRow, StyledTableCell } from './styles'
+import { StyledTableCell } from './styles'
 
 const TableCell = ({ data, type, align }) => {
   if (type === 'TEXT_NAME_ADDRESS')

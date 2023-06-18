@@ -82,11 +82,7 @@ export const parseProxyCreatedEvent = (event) => {
   return result
 }
 
-export const getBetStatus = ({
-  startTime,
-  bettingPeriodEndsAt,
-  lockInPeriodEndsAt,
-}) => {
+export const getBetStatus = ({ bettingPeriodEndsAt, lockInPeriodEndsAt }) => {
   const currentTime = Date.now() / 1000
   if (currentTime < bettingPeriodEndsAt) {
     return { status: 'BET_OPEN', color: 'green' }

@@ -4,14 +4,14 @@ import Typography from 'src/components/Typography'
 import { FallbackWrapper, ButtonWrapper } from './styles'
 
 const Fallback = ({ children }) => {
-  const { handleChangeChain, chainNotSupported, wallet, account, connect } =
+  const { handleChangeChain, chainNotSupported, account, connect } =
     useContext(BaseContext)
 
   if (!account)
     return (
       <FallbackWrapper>
         <Typography type="p24" color="darkGrey">
-          Connect wallet to display data
+          Connec to display data
         </Typography>
         <ButtonWrapper onClick={() => connect()}>
           <Typography type="p16" color="black">

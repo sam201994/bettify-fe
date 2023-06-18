@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import { colors } from 'src/utils/colors'
-
 export const PlaceholderWrapper = styled.div`
   display: flex;
   flex-direction: column;

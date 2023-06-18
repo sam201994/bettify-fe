@@ -1,5 +1,4 @@
 import Typography from 'src/components/Typography'
-import Button from 'src/components/Button'
 import { CardInnerWrapper, StatsCardWrapper } from './styles'
 
 const StatsCard = ({ title, number }) => {

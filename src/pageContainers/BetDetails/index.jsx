@@ -13,17 +13,11 @@ import {
 import { useModal } from 'src/hooks'
 import Fallback from 'src/components/Fallback'
 import Placeholder from 'src/components/Placeholder'
-import { useRouter } from 'next/router'
-import { BaseContext } from 'src/context/BaseContext'
-import { useContext, useState, useEffect } from 'react'
-import { useGetAllBetsOfAProxy } from 'src/queries'
 import useBetDetails from './useBetDetails'
 
-export default function BetDetails() {
-  const router = useRouter()
-
-  const { address } = router.query
-  const { loading, proxyData, betsLoading, allBets } = useBetDetails(address)
+export default function BetDetails({ proxyAddress }) {
+  const { loading, proxyData, betsLoading, allBets } =
+    useBetDetails(proxyAddress)
 
   const tickets = [1, 2, 3, 5, 6]
 
@@ -56,14 +50,14 @@ export default function BetDetails() {
             </div>
           </BetsPlacedHeaderWrapper>
           <TicketListWrapper>
-            {/*{tickets.map((ticket, index) => {
+            {tickets.map((ticket, index) => {
               return (
                 <div key={ticket}>
                   <TicketCard />
                   {tickets.length - 1 === index ? null : <DividerWrapper />}
                 </div>
               )
-            })}*/}
+            })}
           </TicketListWrapper>
         </TicketContainerWrapper>
       </div>

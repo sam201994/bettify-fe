@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react'
-import Link from 'next/link'
 
 import { BaseContext } from 'src/context/BaseContext'
 import { colors } from 'src/utils/colors'
@@ -50,7 +49,7 @@ const Header = () => {
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
-          {/* <NameAddress imgSize={18} textSize="p12" address={account} /> */}
+          <NameAddress imgSize={18} textSize="p12" address={account} />
           {open ? (
             <ExpandLessIcon sx={{ color: colors.lightGrey }} size="12" />
           ) : (

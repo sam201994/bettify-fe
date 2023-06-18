@@ -29,7 +29,7 @@ export default function Bets() {
       <CardListWrapper id="ola2">
         {allProxies.map((bet) => {
           return (
-            <div onClick={() => handleOnClickBet(bet)} key={bet.id}>
+            <div onClick={() => handleOnClickBet(bet)} key={bet.proxyAddress}>
               <BetCard data={bet} />
             </div>
           )

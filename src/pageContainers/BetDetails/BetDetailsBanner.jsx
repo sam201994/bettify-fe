@@ -7,15 +7,12 @@ import {
 import Tag from 'src/components/Tag'
 import Status from 'src/components/Status'
 import Typography from 'src/components/Typography'
-import Button from 'src/components/Button'
 import { BannerWrapper, BannerInnerWrapper } from './styles'
-import { useModal } from 'src/hooks'
 import NameAddress from 'src/components/NameAddress'
 import { BaseContext } from 'src/context/BaseContext'
 import { getAddress } from 'ethers/lib/utils'
 
 import { useContext } from 'react'
-import { chains, chainMapping } from 'src/utils/supportedChains'
 
 const BetCard = ({ data }) => {
   const { account } = useContext(BaseContext)

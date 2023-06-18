@@ -13,7 +13,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }))
 
-export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+export const StyledTableRow = styled(TableRow)(() => ({
   // '&:nth-of-type(odd)': {
   //   backgroundColor: colors.secondary,
   // },

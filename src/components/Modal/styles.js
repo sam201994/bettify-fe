@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import { colors } from 'src/utils/colors'
-
 export const DialogWrapper = styled.div`
   background: #282828;
   padding: 40px;
@@ -10,6 +8,7 @@ export const DialogWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `
+
 /* ------ CUSTOM WRAPPERS ------ */
 
 export const CreateBetWrapper = styled.div`
