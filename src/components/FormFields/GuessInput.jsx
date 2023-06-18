@@ -57,7 +57,6 @@ const GuessInput = ({
   onChange,
   ...props
 }) => {
-  console.log({ err: props.error })
   return (
     <InputWrapper>
       <div className="left-section">
