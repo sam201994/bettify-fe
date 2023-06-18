@@ -52,6 +52,7 @@ export const PageContainer = styled.div`
   margin-left: 40px;
   margin-right: 40px;
   gap: 20px;
+  margin-bottom: 40px;
 `
 
 export const MenuWrapper = styled.div`

@@ -39,7 +39,7 @@ export default function Bets() {
   }
 
   return (
-    <PageContainer id="ola1">
+    <PageContainer>
       <Header />
       <Fallback>{renderData()}</Fallback>
     </PageContainer>

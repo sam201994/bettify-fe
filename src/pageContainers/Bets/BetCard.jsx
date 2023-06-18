@@ -1,8 +1,3 @@
-// import BetOpenCard from './BetOpenCard'
-// import BetLockedCard from './BetLockedCard'
-// import BetClosedCard from './BetClosedCard'
-
-// import { CardWrapper } from 'src/components/CardStyles'
 import {
   getBetStatus,
   formatWeiToDecimal,
@@ -13,37 +8,48 @@ import Tag from 'src/components/Tag'
 import Status from 'src/components/Status'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
-import { CardWrapper, CardInnerWrapper, DateWrapper } from './styles'
+import { CardWrapper, CardInnerWrapper } from './styles'
 import { useModal } from 'src/hooks'
 import NameAddress from 'src/components/NameAddress'
+import { BaseContext } from 'src/context/BaseContext'
+import { getAddress } from 'ethers/lib/utils'
+
+import { useContext } from 'react'
 
 const BetCard = ({ data, onClick }) => {
+  const { account } = useContext(BaseContext)
+
   const { startTime, bettingPeriodEndsAt, lockInPeriodEndsAt } = data
   const { status, color } = getBetStatus({
     startTime,
     bettingPeriodEndsAt,
     lockInPeriodEndsAt,
   })
-  const { dateLabel, date } = getBetDateData(data, status)
 
-  const tags = []
+  const { dateLabel, date } = getBetDateData(data, status)
+  console.log(data, account)
+  const tags =
+    getAddress(account) === getAddress(data.ownerAddress) ? ['my bet'] : []
 
   return (
     <CardWrapper>
       <CardInnerWrapper>
         <div className="top-section">
           <div className="title-section">
-            <NameAddress
-              address={data.proxyAddress}
-              imgSize={20}
-              textSize={'p20'}
-            />
+            <div>
+              <Typography type="p12" color="lightGrey">
+                {data.factoryName}
+              </Typography>
+              <NameAddress
+                address={data.proxyAddress}
+                imgSize={20}
+                textSize={'p20'}
+              />
+            </div>
 
             <Status color={color} />
           </div>
-          <Typography type="p12" color="lightGrey">
-            {data.factoryName}
-          </Typography>
+
           <div className="tag-section">
             {tags.map((label) => {
               return <Tag theme="dark" label={label} key={label} />
@@ -51,11 +57,11 @@ const BetCard = ({ data, onClick }) => {
           </div>
         </div>
         <div className="bottom-section">
-          <Typography type="p14" color="white">
-            {`Stake amount: ${formatWeiToDecimal(data.stakeAmount)} ETH`}
-          </Typography>
+          <div className="left-section">
+            <Typography type="p14" color="white">
+              {`Stake amount: ${formatWeiToDecimal(data.stakeAmount)} ETH`}
+            </Typography>
 
-          <DateWrapper>
             <div className="date-section">
               <Typography type="p12" color="lightGrey">
                 {dateLabel}
@@ -64,7 +70,20 @@ const BetCard = ({ data, onClick }) => {
                 {date}
               </Typography>
             </div>
-          </DateWrapper>
+          </div>
+
+          <div className="right-section">
+            <div className="owner-section">
+              <Typography type="p14" color="white">
+                Owner
+              </Typography>
+              <NameAddress
+                imgSize={14}
+                textSize={'p12'}
+                address={data.ownerAddress}
+              />
+            </div>
+          </div>
         </div>
       </CardInnerWrapper>
     </CardWrapper>
@@ -72,22 +91,3 @@ const BetCard = ({ data, onClick }) => {
 }
 
 export default BetCard
-
-{
-  /*   <div className="winner-section">
-        {winner && (
-          <>
-            <Typography type="p14" color="white">
-              Winner
-            </Typography>
-            <NameAddress imgSize={14} textSize={'p12'} />
-          </>
-        )}
-      </div>*/
-}
-
-{
-  /*<div className="button-section">
-            <Button label="Place Bet" onClick={() => {}} />
-          </div>*/
-}

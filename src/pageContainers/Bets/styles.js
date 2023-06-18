@@ -31,7 +31,7 @@ export const CardInnerWrapper = styled.div`
   height: 100%;
   gap: 50px;
   .top-section {
-    gap: 5px;
+    gap: 10px;
     display: flex;
     flex-direction: column;
     .title-section {
@@ -51,44 +51,19 @@ export const CardInnerWrapper = styled.div`
   }
   .bottom-section {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    .button-section {
-      display: flex;
-
-      gap: 15px;
-    }
+    justify-content: space-between;
+    flex-direction: row;
   }
-`
-
-// export const CardWrapper = styled.div`
-//   background: ${colors.secondary};
-//   border-radius: 12px;
-//   padding: 20px;
-//   width: fit-content;
-//   min-width: 400px;
-// `
-
-// export const CardListWrapper = styled.div`
-//   display: grid;
-//   grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
-//   grid-gap: 20px;
-//   max-width: calc(100vw - 90px);
-//   margin: 0 auto;
-// `
-
-export const DateWrapper = styled.div`
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
-
-  .date-section {
+  .right-section {
+    display: flex;
+    align-items: flex-end;
+  }
+  .left-section {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    width: 175px;
+    gap: 20px;
   }
-  .winner-section {
+  .owner-section {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
