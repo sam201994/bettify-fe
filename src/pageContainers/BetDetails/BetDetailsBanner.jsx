@@ -8,7 +8,7 @@ import Tag from 'src/components/Tag'
 import Status from 'src/components/Status'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
-import { CardWrapper, CardInnerWrapper } from './styles'
+import { BannerWrapper, BannerInnerWrapper } from './styles'
 import { useModal } from 'src/hooks'
 import NameAddress from 'src/components/NameAddress'
 import { BaseContext } from 'src/context/BaseContext'
@@ -32,8 +32,8 @@ const BetCard = ({ data }) => {
     getAddress(account) === getAddress(data.ownerAddress) ? ['my bet'] : []
 
   return (
-    <CardWrapper>
-      <CardInnerWrapper>
+    <BannerWrapper>
+      <BannerInnerWrapper>
         <div className="top-section">
           <div className="title-section">
             <div>
@@ -85,8 +85,8 @@ const BetCard = ({ data }) => {
             </div>
           </div>
         </div>
-      </CardInnerWrapper>
-    </CardWrapper>
+      </BannerInnerWrapper>
+    </BannerWrapper>
   )
 }
 

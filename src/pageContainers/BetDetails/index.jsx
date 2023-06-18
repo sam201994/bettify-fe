@@ -13,12 +13,19 @@ import {
 import { useModal } from 'src/hooks'
 import Fallback from 'src/components/Fallback'
 import Placeholder from 'src/components/Placeholder'
+import { useRouter } from 'next/router'
+import { BaseContext } from 'src/context/BaseContext'
+import { useContext, useState, useEffect } from 'react'
 
-export default function Home({ proxyAddress }) {
-  const isBetOpen = true
+export default function BetDetails() {
+  const router = useRouter()
+  const { address } = router.query
+  const { allBets, betsLoading } = useContext(BaseContext)
+  const data = allBets?.find((bet) => bet.proxyAddress === address)
+
   const tickets = [1, 2, 3, 5, 6]
 
-  const { Modal, openModal } = useModal({ proxyAddress }, 'PLACE_BET')
+  const { Modal, openModal } = useModal(data, 'PLACE_BET')
 
   const handleOpenPlaceBet = (event) => {
     event.stopPropagation()
@@ -26,8 +33,8 @@ export default function Home({ proxyAddress }) {
   }
 
   const renderData = () => {
-    if (false) return <Placeholder label1="loading bets..." />
-    if (false)
+    if (betsLoading) return <Placeholder label1="loading bets..." />
+    if (!data)
       return (
         <Placeholder
           label1="No data"
@@ -36,7 +43,7 @@ export default function Home({ proxyAddress }) {
       )
     return (
       <div>
-        <BetDetailsBanner data={{}} isBetOpen={isBetOpen} />
+        <BetDetailsBanner data={data} />
         <TicketContainerWrapper>
           <BetsPlacedHeaderWrapper>
             <Typography type="p24" color="white">
@@ -62,8 +69,8 @@ export default function Home({ proxyAddress }) {
   }
 
   return (
-    <PageContainer id="ola1">
-      <Header betName={'Bitcoin Prediction #34'} />
+    <PageContainer>
+      <Header betName={data.factoryName} />
       <Fallback>{renderData()}</Fallback>
       <Modal />
     </PageContainer>
