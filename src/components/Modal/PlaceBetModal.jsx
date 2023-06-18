@@ -12,10 +12,6 @@ import { BaseContext } from 'src/context/BaseContext'
 const PlaceBetModal = ({ showModal, setShowModal, data }) => {
   const [guess, setGuess] = useState(null)
   const { placeBet } = useGame(data.proxyAddress)
-  const { allBets, betsLoading } = useContext(BaseContext)
-  const currentBet = allBets.find(
-    (bet) => bet.proxyAddress === data.proxyAddress,
-  )
 
   const handleGuessChange = (event) => {
     event.preventDefault()
@@ -24,7 +20,7 @@ const PlaceBetModal = ({ showModal, setShowModal, data }) => {
 
   const handlePlaceBet = async (event) => {
     event.preventDefault()
-    const stakeAmount = currentBet.stakeAmount
+    const stakeAmount = data.stakeAmount
     await placeBet(guess, stakeAmount)
   }
 

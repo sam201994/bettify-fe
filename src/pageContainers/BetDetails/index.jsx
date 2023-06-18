@@ -70,7 +70,7 @@ export default function BetDetails() {
 
   return (
     <PageContainer>
-      <Header betName={data.factoryName} />
+      <Header betName={data?.factoryName} />
       <Fallback>{renderData()}</Fallback>
       <Modal />
     </PageContainer>
