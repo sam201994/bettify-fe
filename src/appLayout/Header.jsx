@@ -29,7 +29,7 @@ const Header = () => {
     return (
       <HeaderWrapper>
         <ConnectWrapper>
-          <Typography type="p12" color="white">
+          <Typography type="p12" color="lightGrey">
             connecting...
           </Typography>
         </ConnectWrapper>
@@ -74,7 +74,7 @@ const Header = () => {
   return (
     <HeaderWrapper onClick={() => connect()}>
       <ConnectWrapper>
-        <Typography type="p12" color="white">
+        <Typography type="p12" color="lightGrey">
           Connect Wallet
         </Typography>
       </ConnectWrapper>

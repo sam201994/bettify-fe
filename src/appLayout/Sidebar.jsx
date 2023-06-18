@@ -5,26 +5,31 @@ import {
   BorderColorIcon,
   GamesIcon,
 } from 'src/components/Icons'
-import { IconButon } from 'src/components/Button'
 import { SidebarWrapper, MenuWrapper, MenuItemWrapper } from './styles'
+import { colors } from 'src/utils/colors'
 
 const Sidebar = () => {
+  const customStyles = {
+    color: colors.white,
+    '&:hover': { color: colors.lightGrey },
+  }
+
   return (
     <SidebarWrapper>
       <MenuWrapper>
         <MenuItemWrapper>
           <Link href="/">
-            <SpaceDashboardIcon sx={{ color: '#FFFFFF' }} />
+            <SpaceDashboardIcon sx={customStyles} />
           </Link>
         </MenuItemWrapper>
         <MenuItemWrapper>
           <Link href="/bets">
-            <GamesIcon sx={{ color: '#FFFFFF' }} />
+            <GamesIcon sx={customStyles} />
           </Link>
         </MenuItemWrapper>
         <MenuItemWrapper>
           <Link href="/create">
-            <BorderColorIcon sx={{ color: '#FFFFFF' }} />
+            <BorderColorIcon sx={customStyles} />
           </Link>
         </MenuItemWrapper>
       </MenuWrapper>
