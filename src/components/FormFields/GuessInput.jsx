@@ -5,7 +5,11 @@ import Image from 'next/image'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 import styled from 'styled-components'
-
+import {
+  getBetStatus,
+  formatWeiToDecimal,
+  getBetDateData,
+} from 'src/utils/web3Utils'
 import { colors } from 'src/utils/colors'
 
 const InputWrapper = styled.div`
@@ -35,7 +39,7 @@ const TextInput = styled.input`
   border: none;
   border: 0;
   color: white;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 500;
   &::placeholder {
     color: ${colors.dullGrey};
@@ -46,17 +50,13 @@ const TextInput = styled.input`
   }
 `
 
-const GuessInput = ({ value, onChange }) => {
+const GuessInput = ({ betData, value, onChange, ...props }) => {
   return (
     <InputWrapper>
       <div className="left-section">
-        <TextInput
-          placeholder="guess here.."
-          value={value}
-          onChange={onChange}
-        />
+        <TextInput value={value} onChange={onChange} {...props} />
         <Typography type="p14" color="lightGrey">
-          $1 ETH
+          {`${formatWeiToDecimal(betData.stakeAmount)} ETH`}
         </Typography>
       </div>
       <div className="right-section">

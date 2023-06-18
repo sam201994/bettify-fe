@@ -8,20 +8,50 @@ import { PlaceBetWrapper } from './styles'
 import { useGame } from 'src/hooks'
 import { useContext } from 'react'
 import { BaseContext } from 'src/context/BaseContext'
+import { useFormik } from 'formik'
+import { extractNaturalNumber, extractDecimalNumber } from 'src/utils/web3Utils'
 
 const PlaceBetModal = ({ showModal, setShowModal, data }) => {
-  const [guess, setGuess] = useState(null)
   const { placeBet } = useGame(data.proxyAddress)
+  const [loading, setLoading] = useState(false)
 
-  const handleGuessChange = (event) => {
-    event.preventDefault()
-    setGuess(event.target.value)
-  }
+  const { values, errors, handleSubmit, touched, setFieldValue } = useFormik({
+    initialValues: {
+      guess: '',
+    },
+    validate: (values) => {
+      const errors = {}
 
-  const handlePlaceBet = async (event) => {
-    event.preventDefault()
-    const stakeAmount = data.stakeAmount
-    await placeBet(guess, stakeAmount)
+      if (!values.guess) {
+        errors.guess = true
+      }
+
+      return errors
+    },
+
+    onSubmit: async (values) => {
+      setLoading(true)
+      try {
+        event.preventDefault()
+        const stakeAmount = data.stakeAmount
+        await placeBet(guess, stakeAmount)
+        // queryClient.invalidateQueries('allProxies')
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setLoading(false)
+      }
+    },
+  })
+
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    if (name === 'guess') {
+      const num = extractNaturalNumber(value)
+      setFieldValue(name, num)
+    } else {
+      setFieldValue(name, num)
+    }
   }
 
   return (
@@ -31,8 +61,16 @@ const PlaceBetModal = ({ showModal, setShowModal, data }) => {
       title={'Place bet'}
     >
       <PlaceBetWrapper>
-        <GuessInput value={guess} onChange={handleGuessChange} />
-        <Button label="Place Bet" onClick={handlePlaceBet} />
+        <GuessInput
+          betData={data}
+          placeholder={'Type your guess here...'}
+          required={true}
+          error={touched.guess && errors.guess}
+          value={values.guess}
+          name="guess"
+          onChange={handleChange}
+        />
+        <Button label="Place Bet" onClick={handleSubmit} />
       </PlaceBetWrapper>
     </CustomModal>
   )
