@@ -16,12 +16,26 @@ import Placeholder from 'src/components/Placeholder'
 import { useRouter } from 'next/router'
 import { BaseContext } from 'src/context/BaseContext'
 import { useContext, useState, useEffect } from 'react'
+import { useGetAllBetsOfAProxy } from 'src/queries'
 
 export default function BetDetails() {
   const router = useRouter()
   const { address } = router.query
-  const { allBets, betsLoading } = useContext(BaseContext)
-  const data = allBets?.find((bet) => bet.proxyAddress === address)
+
+  // useEffect(() => {
+  //   if (!wallet?.provider) {
+  //     setProvider(null)
+  //   } else {
+  //     const webProvider = new ethers.providers.Web3Provider(
+  //       wallet.provider,
+  //       'any',
+  //     )
+  //     setProvider(webProvider)
+  //   }
+  // }, [wallet])
+
+  const { allProxies, proxiesLoading } = useContext(BaseContext)
+  const data = allProxies?.find((bet) => bet.proxyAddress === address)
 
   const tickets = [1, 2, 3, 5, 6]
 
@@ -33,7 +47,7 @@ export default function BetDetails() {
   }
 
   const renderData = () => {
-    if (betsLoading) return <Placeholder label1="loading bets..." />
+    if (proxiesLoading) return <Placeholder label1="loading bets..." />
     if (!data)
       return (
         <Placeholder

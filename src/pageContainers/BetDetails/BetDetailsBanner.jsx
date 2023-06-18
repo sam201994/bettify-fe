@@ -15,6 +15,7 @@ import { BaseContext } from 'src/context/BaseContext'
 import { getAddress } from 'ethers/lib/utils'
 
 import { useContext } from 'react'
+import { chains, chainMapping } from 'src/utils/supportedChains'
 
 const BetCard = ({ data }) => {
   const { account } = useContext(BaseContext)

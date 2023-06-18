@@ -7,18 +7,19 @@ import BetCard from './BetCard'
 import Header from './Header'
 import Fallback from 'src/components/Fallback'
 import Placeholder from 'src/components/Placeholder'
+
 export default function Bets() {
   const router = useRouter()
-  const { allBets, betsLoading } = useContext(BaseContext)
-  console.log({ allBets, betsLoading })
+  const { allProxies, proxiesLoading } = useContext(BaseContext)
+  console.log({ allProxies, proxiesLoading })
 
   const handleOnClickBet = (bet) => {
     router.push(`/bets/${bet.proxyAddress}`)
   }
 
   const renderData = () => {
-    if (betsLoading) return <Placeholder label1="loading bets..." />
-    if (!allBets?.length)
+    if (proxiesLoading) return <Placeholder label1="loading bets..." />
+    if (!allProxies?.length)
       return (
         <Placeholder
           label1="No data"
@@ -27,7 +28,7 @@ export default function Bets() {
       )
     return (
       <CardListWrapper id="ola2">
-        {allBets.map((bet) => {
+        {allProxies.map((bet) => {
           return (
             <div onClick={() => handleOnClickBet(bet)} key={bet.id}>
               <BetCard data={bet} />
