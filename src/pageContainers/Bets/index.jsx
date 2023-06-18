@@ -6,7 +6,7 @@ import { CardListWrapper } from './styles'
 import BetCard from './BetCard'
 import Header from './Header'
 import Fallback from 'src/components/Fallback'
-
+import Placeholder from 'src/components/Placeholder'
 export default function Bets() {
   const router = useRouter()
   const { allBets, betsLoading } = useContext(BaseContext)
@@ -16,22 +16,32 @@ export default function Bets() {
     router.push(`/bets/${bet.proxyAddress}`)
   }
 
-  if (!allBets) return null
+  const renderData = () => {
+    if (betsLoading) return <Placeholder label1="loading bets..." />
+    if (!allBets?.length)
+      return (
+        <Placeholder
+          label1="No data"
+          label2="Create bets to start staking and earn interest"
+        />
+      )
+    return (
+      <CardListWrapper id="ola2">
+        {allBets.map((bet) => {
+          return (
+            <div onClick={() => handleOnClickBet(bet)} key={bet.id}>
+              <BetCard data={bet} />
+            </div>
+          )
+        })}
+      </CardListWrapper>
+    )
+  }
 
   return (
     <PageContainer id="ola1">
       <Header />
-      <Fallback>
-        <CardListWrapper id="ola2">
-          {allBets.map((bet) => {
-            return (
-              <div onClick={() => handleOnClickBet(bet)} key={bet.id}>
-                <BetCard data={bet} />
-              </div>
-            )
-          })}
-        </CardListWrapper>
-      </Fallback>
+      <Fallback>{renderData()}</Fallback>
     </PageContainer>
   )
 }
