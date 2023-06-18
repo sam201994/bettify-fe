@@ -21,7 +21,11 @@ const Header = () => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
-    // disconnect()
+    setAnchorEl(null)
+  }
+
+  const handleDisconnect = async () => {
+    await disconnect(wallet)
     setAnchorEl(null)
   }
 
@@ -38,37 +42,42 @@ const Header = () => {
   }
   if (wallet) {
     return (
-      <div>
-        <HeaderWrapper onClick={handleClick}>
-          <ConnectWrapper>
-            <NameAddress imgSize={18} textSize="p12" address={account} />
-            {open ? (
-              <ExpandLessIcon sx={{ color: colors.lightGrey }} size="12" />
-            ) : (
-              <ExpandMoreIcon sx={{ color: colors.lightGrey }} size="12" />
-            )}
-          </ConnectWrapper>
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
+      <HeaderWrapper>
+        <ConnectWrapper
+          id="basic-button"
+          aria-controls={open ? 'basic-menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
+        >
+          {/* <NameAddress imgSize={18} textSize="p12" address={account} /> */}
+          {open ? (
+            <ExpandLessIcon sx={{ color: colors.lightGrey }} size="12" />
+          ) : (
+            <ExpandMoreIcon sx={{ color: colors.lightGrey }} size="12" />
+          )}
+        </ConnectWrapper>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          <MenuItem
+            sx={{
+              '&:hover': {
+                backgroundColor: colors.lightGrey,
+              },
             }}
+            onClick={handleDisconnect}
           >
-            <MenuItem
-              sx={{
-                backgroundColor: `${colors.secondary}`,
-                color: `${colors.secondary}`,
-              }}
-              onClick={handleClose}
-            >
-              Disconnect
-            </MenuItem>
-          </Menu>
-        </HeaderWrapper>
-      </div>
+            Disconnect
+          </MenuItem>
+        </Menu>
+      </HeaderWrapper>
     )
   }
   return (

@@ -35,8 +35,8 @@ export const BaseProvider = (props) => {
   const [provider, setProvider] = useState(null)
 
   const k = useGetAllProxies()
-  const { data: allBets, isLoading: betsLoading } = k
-  console.log({ k })
+  const { data: allBets, isLoading: betsLoading, isFetching: betsFetching } = k
+  console.log({ betsLoading, betsFetching })
 
   useEffect(() => {
     if (!wallet?.provider) {

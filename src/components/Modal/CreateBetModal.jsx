@@ -54,7 +54,7 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
           lockInPeriodEnd,
           parseEther(values.stakeAmount),
         )
-        queryClient.invalidateQueries('allBets')
+        queryClient.invalidateQueries('allProxies')
       } catch (err) {
         console.log(err)
       } finally {

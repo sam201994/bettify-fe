@@ -22,47 +22,55 @@ export const useGetTokenUSDPrices = (coinGeckoIds) => {
 }
 
 export const useGetAllProxies = () => {
-  return useQuery('allProxies', async () => {
-    const addresses = Object.keys(FACTORY_CONTRACTS)
-    const contractInterface = new ethers.utils.Interface(
-      FACTORY_CONTRACTS[addresses[0]].abi,
-    )
-    const topic = contractInterface.getEventTopic('ProxyCreated')
+  return useQuery(
+    'allProxies',
+    async () => {
+      const addresses = Object.keys(FACTORY_CONTRACTS)
+      const contractInterface = new ethers.utils.Interface(
+        FACTORY_CONTRACTS[addresses[0]].abi,
+      )
+      const topic = contractInterface.getEventTopic('ProxyCreated')
 
-    const options = {
-      method: 'POST',
-      url: 'https://eth-goerli.g.alchemy.com/v2/7KtCu2ltd_kySqJCYeb7KwfdUYl3yHWg',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-      },
-      data: {
-        id: 1,
-        jsonrpc: '2.0',
-        method: 'eth_getLogs',
-        params: [
-          {
-            address: addresses,
-            fromBlock: '0x429d3b',
-            toBlock: 'latest',
-            topics: [topic],
-          },
-        ],
-      },
-    }
-
-    const response = await axios.request(options)
-    const decodedEvents = response.data.result.map((event) => {
-      const decodedEvent = contractInterface.parseLog(event)
-
-      return {
-        ...parseProxyCreatedEvent(decodedEvent),
-        factoryName: FACTORY_CONTRACTS[getAddress(event.address)].name,
-        factoryContractAddress: getAddress(event.address),
+      const options = {
+        method: 'POST',
+        url: 'https://eth-goerli.g.alchemy.com/v2/7KtCu2ltd_kySqJCYeb7KwfdUYl3yHWg',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+        },
+        data: {
+          id: 1,
+          jsonrpc: '2.0',
+          method: 'eth_getLogs',
+          params: [
+            {
+              address: addresses,
+              fromBlock: '0x429d3b',
+              toBlock: 'latest',
+              topics: [topic],
+            },
+          ],
+        },
       }
-    })
-    return decodedEvents
-  })
+
+      const response = await axios.request(options)
+      const decodedEvents = response.data.result.map((event) => {
+        const decodedEvent = contractInterface.parseLog(event)
+
+        return {
+          ...parseProxyCreatedEvent(decodedEvent),
+          factoryName: FACTORY_CONTRACTS[getAddress(event.address)].name,
+          factoryContractAddress: getAddress(event.address),
+        }
+      })
+      return decodedEvents
+    },
+    {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    },
+  )
 }
 
 export const useGetAllBetsOfAProxy = (proxyAddress) => {

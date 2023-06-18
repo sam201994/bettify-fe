@@ -54,7 +54,7 @@ const useModal = (data, type) => {
   }
 
   const Modal = () => {
-    return <>{isModalOpen && <div>{renderModalType()}</div>}</>
+    return <>{isModalOpen && <>{renderModalType()}</>}</>
   }
 
   return { openModal, closeModal, Modal, isModalOpen }
