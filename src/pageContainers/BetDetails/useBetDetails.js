@@ -1,6 +1,9 @@
 import { useContext } from 'react'
 import { BaseContext } from 'src/context/BaseContext'
-import { useGetAllBetsOfAProxy } from 'src/queries'
+import {
+  useGetAllBetsOfAProxy,
+  useGetAllWithdrawalsOfAProxy,
+} from 'src/queries'
 
 const useBetsDetails = (address) => {
   const { allProxies, proxiesLoading } = useContext(BaseContext)
@@ -8,7 +11,8 @@ const useBetsDetails = (address) => {
   const { data: allBets, isLoading: betsLoading } =
     useGetAllBetsOfAProxy(address)
 
-  console.log({ allBets })
+  const { data: withdrawals, isLoading: withdrawalsLoading } =
+    useGetAllWithdrawalsOfAProxy(address)
 
   const proxyData = allProxies?.find((bet) => bet.proxyAddress === address)
 
@@ -17,6 +21,8 @@ const useBetsDetails = (address) => {
     proxyData,
     betsLoading: betsLoading,
     allBets: allBets,
+    withdrawalsLoading: withdrawalsLoading,
+    withdrawals: withdrawals,
   }
 }
 

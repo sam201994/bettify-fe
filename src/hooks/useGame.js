@@ -6,8 +6,13 @@ const useGame = (proxyAddress) => {
   const [ProxyContract] = useContract(proxyAddress, Implementation.abi)
 
   const placeBet = async (bet, betAmount) => {
+    const estimatedGas = await ProxyContract.estimateGas.placeBet(bet, {
+      value: betAmount.toString(),
+    })
+    const gasLimit = estimatedGas.mul(2)
     const tx = await ProxyContract.placeBet(bet, {
       value: betAmount.toString(),
+      gasLimit,
     })
     const receipt = await tx.wait()
     const tokenId = getTicketIdFromPlaceBetReceipt(receipt)
@@ -15,7 +20,13 @@ const useGame = (proxyAddress) => {
   }
 
   const withdrawFunds = async (ticketId) => {
-    const tx = await ProxyContract.withdrawFunds(+ticketId)
+    const estimatedGas = await ProxyContract.estimateGas.withdrawFunds(
+      +ticketId,
+    )
+    const gasLimit = estimatedGas.mul(2)
+    const tx = await ProxyContract.withdrawFunds(+ticketId, {
+      gasLimit,
+    })
     const receipt = await tx.wait()
     return receipt
   }
@@ -23,11 +34,11 @@ const useGame = (proxyAddress) => {
   const findWinner = async () => {
     const tx = await ProxyContract.findWinner()
     const receipt = await tx.wait()
-    // TODO: find the winner from the logs of the transaction receipt and return the winner ticket, the winning amount and the bet
     return receipt
   }
 
   const mockFindWinner = async () => {
+    if (!ProxyContract) return
     const [winnerTicket, winningAmount] =
       await ProxyContract.callStatic.findWinner()
 
@@ -38,12 +49,10 @@ const useGame = (proxyAddress) => {
   }
 
   const getWinner = async () => {
+    if (!ProxyContract) return
     const winnerTicket = await ProxyContract.winnerTicket()
-    const bet = await ProxyContract.bets(winnerTicket)
-
     return {
       winnerTicket: winnerTicket.toString(),
-      bet: bet.toString(),
     }
   }
 

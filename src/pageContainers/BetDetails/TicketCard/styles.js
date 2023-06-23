@@ -7,5 +7,7 @@ export const TicketCardWrapper = styled.div`
   padding-bottom: 20px;
   .right-section {
     width: 200px;
+    display: flex;
+    justify-content: center;
   }
 `

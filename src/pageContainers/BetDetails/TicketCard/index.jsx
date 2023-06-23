@@ -6,9 +6,15 @@ import { useContext } from 'react'
 import { BaseContext } from 'src/context/BaseContext'
 import { getAddress } from 'ethers/lib/utils'
 
-const TicketCard = ({ data, stakeAmount }) => {
+const TicketCard = ({
+  data,
+  stakeAmount,
+  isWinner,
+  isWithdrawn,
+  withdrawalsLoading,
+}) => {
   const { Modal, openModal } = useModal(
-    { ...data, stakeAmount },
+    { ...data, stakeAmount, isWinner },
     'WITHDRAW_BET',
   )
   const { account } = useContext(BaseContext)
@@ -31,8 +37,22 @@ const TicketCard = ({ data, stakeAmount }) => {
         </div>
 
         <div className="right-section">
-          {getAddress(account) == getAddress(data.userAddress) && (
-            <Button label="Withdraw bet" onClick={handleOpenWithdrawBet} />
+          {getAddress(account) == getAddress(data.userAddress) &&
+            !withdrawalsLoading &&
+            !isWithdrawn && (
+              <Button
+                label={!isWinner ? 'Withdraw bet' : 'Claim winnings'}
+                onClick={handleOpenWithdrawBet}
+              />
+            )}
+          {isWithdrawn && !withdrawalsLoading && (
+            <Typography
+              type="p16"
+              color="lightGrey"
+              customStyles={{ fontStyle: 'italic' }}
+            >
+              Withdrawn
+            </Typography>
           )}
         </div>
       </TicketCardWrapper>

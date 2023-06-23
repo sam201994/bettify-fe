@@ -2,7 +2,11 @@ import axios from 'axios'
 import { useQuery } from 'react-query'
 import { FACTORY_CONTRACTS } from '../utils/contracts'
 import { ethers } from 'ethers'
-import { parseBetPlacedEvent, parseProxyCreatedEvent } from '../utils/web3Utils'
+import {
+  parseBetPlacedEvent,
+  parseProxyCreatedEvent,
+  parseBetWithdrawnEvent,
+} from '../utils/web3Utils'
 import { getAddress } from 'ethers/lib/utils'
 import ImplementationContract from '../abis/Implementation.json'
 // import ProxyContractABI from '../abis/ProxyContractABI.json'
@@ -84,8 +88,6 @@ export const useGetAllBetsOfAProxy = (proxyAddress) => {
 
       const topic = contractInterface.getEventTopic('BetPlaced')
 
-      console.log({ topic, proxyAddress })
-
       const options = {
         method: 'POST',
         url: 'https://eth-goerli.g.alchemy.com/v2/7KtCu2ltd_kySqJCYeb7KwfdUYl3yHWg',
@@ -109,12 +111,9 @@ export const useGetAllBetsOfAProxy = (proxyAddress) => {
       }
 
       const response = await axios.request(options)
-      console.log({ response })
       const decodedEvents = response.data.result.map((event) => {
         try {
-          console.log({ event })
           const decodedEvent = contractInterface.parseLog(event)
-          console.log({ decodedEvent })
 
           return {
             ...parseBetPlacedEvent(decodedEvent),
@@ -133,4 +132,52 @@ export const useGetAllBetsOfAProxy = (proxyAddress) => {
       refetchOnReconnect: false,
     },
   )
+}
+
+export const useGetAllWithdrawalsOfAProxy = (proxyAddress) => {
+  return useQuery(['allWithdrawals', proxyAddress], async () => {
+    const contractInterface = new ethers.utils.Interface(
+      ImplementationContract.abi,
+    )
+
+    const topic = contractInterface.getEventTopic('Withdrawal')
+
+    const options = {
+      method: 'POST',
+      url: 'https://eth-goerli.g.alchemy.com/v2/7KtCu2ltd_kySqJCYeb7KwfdUYl3yHWg',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+      },
+      data: {
+        id: 1,
+        jsonrpc: '2.0',
+        method: 'eth_getLogs',
+        params: [
+          {
+            address: proxyAddress,
+            fromBlock: '0x429d3b',
+            toBlock: 'latest',
+            topics: [topic],
+          },
+        ],
+      },
+    }
+
+    const response = await axios.request(options)
+    const decodedEvents = response.data.result.map((event) => {
+      try {
+        const decodedEvent = contractInterface.parseLog(event)
+
+        return {
+          ...parseBetWithdrawnEvent(decodedEvent),
+          proxyAddress: getAddress(event.address),
+        }
+      } catch (e) {
+        console.log({ e })
+        return {}
+      }
+    })
+    return decodedEvents
+  })
 }

@@ -93,6 +93,17 @@ export const parseBetPlacedEvent = (event) => {
   return result
 }
 
+export const parseBetWithdrawnEvent = (event) => {
+  const { args } = event
+  const [, user, amount, tokenId] = args
+  const result = {
+    userAddress: user,
+    amount: amount.toString(),
+    tokenId: tokenId.toString(),
+  }
+  return result
+}
+
 export const getBetStatus = ({ bettingPeriodEndsAt, lockInPeriodEndsAt }) => {
   const currentTime = Date.now() / 1000
   if (currentTime < bettingPeriodEndsAt) {

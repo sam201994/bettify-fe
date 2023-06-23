@@ -6,12 +6,15 @@ import { WithdrawBetWrapper } from './styles'
 import { formatEther } from 'ethers/lib/utils'
 
 const WithdrawBetModal = ({ showModal, setShowModal, data }) => {
-  const { stakeAmount, guess, tokenId, proxyAddress } = data
+  const { stakeAmount, guess, tokenId, proxyAddress, isWinner } = data
 
-  const { withdrawFunds } = useGame(proxyAddress)
+  const { withdrawFunds, findWinner } = useGame(proxyAddress)
 
   const handleWithdrawBet = async () => {
     try {
+      if (isWinner) {
+        await findWinner()
+      }
       await withdrawFunds(tokenId)
     } catch (err) {
       console.log(err)
@@ -34,7 +37,10 @@ const WithdrawBetModal = ({ showModal, setShowModal, data }) => {
           </Typography>
         </div>
         <div className="footer-section">
-          <Button label="Withdraw Bet" onClick={handleWithdrawBet} />
+          <Button
+            label={isWinner ? 'Claim winnings' : 'Withdraw bet'}
+            onClick={handleWithdrawBet}
+          />
         </div>
       </WithdrawBetWrapper>
     </CustomModal>
