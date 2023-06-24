@@ -1,6 +1,7 @@
 ## Bettify (Market Prediction)
 
-- [Link to dApp](https://bettify-fe.vercel.app/)
+[Link to dApp](https://bettify-fe.vercel.app/)
+
 dApp that integrates with [smart contracts](https://github.com/sam201994/safe-bet) to allow users to create their own market predictin game from a list of templates. Users can place multiple bets. The winner is rewarded with interest and other
 
 ## Set up
