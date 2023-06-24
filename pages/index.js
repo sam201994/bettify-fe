@@ -1,7 +1,9 @@
-import Dashboard from 'src/pageContainers/Dashboard'
+import CreateBet from 'src/pageContainers/CreateBet'
 
-const DashboardPage = () => {
-  return <Dashboard />
+export default function CreatePage() {
+  return (
+    <>
+      <CreateBet />
+    </>
+  )
 }
-
-export default DashboardPage
