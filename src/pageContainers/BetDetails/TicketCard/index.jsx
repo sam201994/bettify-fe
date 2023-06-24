@@ -13,6 +13,7 @@ const TicketCard = ({
   isWinner,
   isWithdrawn,
   withdrawalsLoading,
+  withdrawDisabled,
 }) => {
   const { Modal, openModal } = useModal(
     { ...data, stakeAmount, isWinner },
@@ -42,8 +43,9 @@ const TicketCard = ({
             !withdrawalsLoading &&
             !isWithdrawn && (
               <Button
-                label={!isWinner ? 'Withdraw bet' : 'Claim winnings'}
+                label={isWinner ? 'Claim winnings' : 'Withdraw bet'}
                 onClick={handleOpenWithdrawBet}
+                disabled={withdrawDisabled}
               />
             )}
           {isWithdrawn && !withdrawalsLoading && (

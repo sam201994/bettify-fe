@@ -1,7 +1,7 @@
 import BitcoinPredictionFactoryContract from 'src/abis/BitcoinPredictionFactoryContract.json'
 
 const BitcoinPriceBetFactoryContractAddress =
-  '0x9D1297D59D3764A667BFf0DfBB442aD5E19D7d66'
+  '0xdb6D87299ECf39Ffa8AD6710df645c69587C51f4'
 
 export const FACTORY_CONTRACTS = {
   [BitcoinPriceBetFactoryContractAddress]: {

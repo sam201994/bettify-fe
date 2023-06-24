@@ -9,11 +9,13 @@ import { useFactoryContract } from 'src/hooks'
 import { extractNaturalNumber, extractDecimalNumber } from 'src/utils/web3Utils'
 import CustomModal from './CustomModal'
 import { CreateBetWrapper } from './styles'
+import { useRouter } from 'next/router'
 
 const CreateBetModal = ({ showModal, setShowModal, data }) => {
   const { createBet } = useFactoryContract(data.address)
   const [loading, setLoading] = useState(false)
   const queryClient = useQueryClient()
+  const router = useRouter()
 
   const { values, errors, handleSubmit, touched, setFieldValue } = useFormik({
     initialValues: {
@@ -46,12 +48,13 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
         const lockInPeriodEnd =
           bettingExpiration + 60 * 60 * 24 * parseInt(values.lockinPeriod)
 
-        await createBet(
+        const proxyAddress = await createBet(
           bettingExpiration,
           lockInPeriodEnd,
           parseEther(values.stakeAmount),
         )
         queryClient.invalidateQueries('allProxies')
+        router.push(`/bets/${proxyAddress}`)
       } catch (err) {
         console.log(err)
       } finally {

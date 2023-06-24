@@ -42,9 +42,9 @@ const PlaceBetModal = ({ showModal, setShowModal, data }) => {
     onSubmit: async (values) => {
       setLoading(true)
       try {
-        event.preventDefault()
         await placeBet(values.guess, data.stakeAmount)
         queryClient.invalidateQueries('allBets')
+        setShowModal(false)
       } catch (err) {
         console.log(err)
       } finally {

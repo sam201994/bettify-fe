@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Box } from '@mui/material'
 
 import { useGame, useModal } from 'src/hooks'
@@ -39,16 +39,14 @@ export default function BetDetails({ proxyAddress }) {
     openModal()
   }
 
-  const handleFindWinner = useCallback(
-    async (event) => {
-      event?.stopPropagation()
-      const res = await mockFindWinner()
-      setWinnerInfo(res)
-      const winner = await getWinner()
-      setWinnerDeclared(!!winner?.winnerTicket)
-    },
-    [getWinner, mockFindWinner],
-  )
+  const handleFindWinner = async (event) => {
+    event?.stopPropagation()
+    const res = await mockFindWinner()
+    setWinnerInfo(res)
+    const winner = await getWinner()
+    console.log({ winner })
+    setWinnerDeclared(winner?.winnerTicket !== '0')
+  }
 
   const bettingPeriodEndsAt = proxyData?.bettingPeriodEndsAt
   const lockInPeriodEndsAt = proxyData?.lockInPeriodEndsAt
@@ -64,7 +62,7 @@ export default function BetDetails({ proxyAddress }) {
       handleFindWinner()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lockInPeriodEndsAt, currentTime, handleFindWinner, allBets?.length])
+  }, [lockInPeriodEndsAt, currentTime, allBets?.length])
 
   const renderData = () => {
     if (loading) return <Placeholder label1="loading bets..." />
@@ -111,6 +109,10 @@ export default function BetDetails({ proxyAddress }) {
                       (event) => event.tokenId === bet.tokenId,
                     )}
                     withdrawalsLoading={withdrawalsLoading}
+                    withdrawDisabled={
+                      currentTime < lockInPeriodEndsAt &&
+                      currentTime > bettingPeriodEndsAt
+                    }
                   />
                   {allBets.length - 1 === index ? null : <DividerWrapper />}
                 </div>

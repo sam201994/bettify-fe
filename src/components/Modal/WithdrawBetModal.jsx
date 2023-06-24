@@ -1,24 +1,32 @@
 import { formatEther } from 'ethers/lib/utils'
-
+import { useState } from 'react'
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 import { useGame } from 'src/hooks'
 import CustomModal from './CustomModal'
 import { WithdrawBetWrapper } from './styles'
+import { useQueryClient } from 'react-query'
 
 const WithdrawBetModal = ({ showModal, setShowModal, data }) => {
   const { stakeAmount, guess, tokenId, proxyAddress, isWinner } = data
+  const queryClient = useQueryClient()
 
   const { withdrawFunds, findWinner } = useGame(proxyAddress)
+  const [loading, setLoading] = useState(false)
 
   const handleWithdrawBet = async () => {
+    setLoading(true)
     try {
       if (isWinner) {
         await findWinner()
       }
       await withdrawFunds(tokenId)
+      queryClient.invalidateQueries('allWithdrawals')
+      setShowModal(false)
     } catch (err) {
       console.log(err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -26,7 +34,7 @@ const WithdrawBetModal = ({ showModal, setShowModal, data }) => {
     <CustomModal
       showModal={showModal}
       setShowModal={setShowModal}
-      title={`Withdraw bet ${'\u00A0'.repeat(2)}  #23`}
+      title={`Withdraw bet #${tokenId}`}
     >
       <WithdrawBetWrapper>
         <div className="top-section">
@@ -41,6 +49,7 @@ const WithdrawBetModal = ({ showModal, setShowModal, data }) => {
           <Button
             label={isWinner ? 'Claim winnings' : 'Withdraw bet'}
             onClick={handleWithdrawBet}
+            loader={loading}
           />
         </div>
       </WithdrawBetWrapper>
