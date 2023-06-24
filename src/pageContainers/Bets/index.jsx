@@ -1,12 +1,13 @@
-import { useRouter } from 'next/router'
-import { BaseContext } from 'src/context/BaseContext'
 import { useContext } from 'react'
+import { useRouter } from 'next/router'
+
+import { BaseContext } from 'src/context/BaseContext'
 import { PageContainer } from 'src/appLayout/styles'
-import { CardListWrapper } from './styles'
-import BetCard from './BetCard'
-import Header from './Header'
 import Fallback from 'src/components/Fallback'
 import Placeholder from 'src/components/Placeholder'
+import BetCard from './BetCard'
+import Header from './Header'
+import { CardListWrapper } from './styles'
 
 export default function Bets() {
   const router = useRouter()

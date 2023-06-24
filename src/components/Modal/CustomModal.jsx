@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Dialog from '@mui/material/Dialog'
 
 import Typography from 'src/components/Typography'

@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+
 import { BaseContext } from 'src/context/BaseContext'
 import {
   useGetAllBetsOfAProxy,

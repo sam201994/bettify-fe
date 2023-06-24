@@ -1,21 +1,22 @@
+import { useEffect, useState, useCallback, useRef } from 'react'
+import { Box } from '@mui/material'
+
+import { useGame, useModal } from 'src/hooks'
 import { PageContainer } from 'src/appLayout/styles'
 import Button from 'src/components/Button'
 import Typography from 'src/components/Typography'
+import Fallback from 'src/components/Fallback'
+import Placeholder from 'src/components/Placeholder'
 import Header from './Header'
 import TicketCard from './TicketCard'
 import BetDetailsBanner from './BetDetailsBanner'
+import useBetDetails from './useBetDetails'
 import {
   BetsPlacedHeaderWrapper,
   TicketContainerWrapper,
   TicketListWrapper,
   DividerWrapper,
 } from './styles'
-import { useGame, useModal } from 'src/hooks'
-import Fallback from 'src/components/Fallback'
-import Placeholder from 'src/components/Placeholder'
-import useBetDetails from './useBetDetails'
-import { useEffect, useState, useCallback, useRef } from 'react'
-import { Box } from '@mui/material'
 
 export default function BetDetails({ proxyAddress }) {
   const [winnerInfo, setWinnerInfo] = useState({})
@@ -60,7 +61,6 @@ export default function BetDetails({ proxyAddress }) {
       winnerInfo !== {} &&
       allBets?.length > 0
     ) {
-      console.log('find winner')
       handleFindWinner()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,7 +1,8 @@
+import { createIcon } from '@download/blockies'
+
 import { minifyAddress } from 'src/utils/web3Utils'
 import Typography from 'src/components/Typography'
 import { NameAddressWrapper } from './styles'
-import { createIcon } from '@download/blockies'
 
 export default function NameAddress({
   imgSize,
@@ -12,7 +13,6 @@ export default function NameAddress({
   const icon = createIcon({
     // All options are optional
     seed: address, // seed used to generate icon data, default: random
-
     size: imgSize, // width/height of the icon in blocks, default: 10
     scale: imgSize, // width/height of each block in pixels, default: 5
   }).toDataURL()

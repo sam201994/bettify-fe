@@ -1,7 +1,7 @@
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
-import { CardInnerWrapper, CardWrapper } from './styles'
 import { useModal } from 'src/hooks'
+import { CardInnerWrapper, CardWrapper } from './styles'
 
 const CreateBetCard = ({ data }) => {
   const { Modal, openModal } = useModal(data, 'CREATE_BET')

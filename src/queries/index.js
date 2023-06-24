@@ -1,15 +1,15 @@
 import axios from 'axios'
 import { useQuery } from 'react-query'
-import { FACTORY_CONTRACTS } from '../utils/contracts'
 import { ethers } from 'ethers'
+import { getAddress } from 'ethers/lib/utils'
+
+import { FACTORY_CONTRACTS } from 'src/utils/contracts'
 import {
   parseBetPlacedEvent,
   parseProxyCreatedEvent,
   parseBetWithdrawnEvent,
-} from '../utils/web3Utils'
-import { getAddress } from 'ethers/lib/utils'
-import ImplementationContract from '../abis/Implementation.json'
-// import ProxyContractABI from '../abis/ProxyContractABI.json'
+} from 'src/utils/web3Utils'
+import ImplementationContract from 'src/abis/Implementation.json'
 
 export const useGetTokenUSDPrices = (coinGeckoIds) => {
   return useQuery(coinGeckoIds, async () => {

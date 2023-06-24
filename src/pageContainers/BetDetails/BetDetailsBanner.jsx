@@ -1,18 +1,17 @@
+import { useContext } from 'react'
+import { getAddress } from 'ethers/lib/utils'
+
+import Tag from 'src/components/Tag'
+import Status from 'src/components/Status'
+import Typography from 'src/components/Typography'
+import NameAddress from 'src/components/NameAddress'
+import { BaseContext } from 'src/context/BaseContext'
 import {
   getBetStatus,
   formatWeiToDecimal,
   getBetDateData,
 } from 'src/utils/web3Utils'
-
-import Tag from 'src/components/Tag'
-import Status from 'src/components/Status'
-import Typography from 'src/components/Typography'
 import { BannerWrapper, BannerInnerWrapper } from './styles'
-import NameAddress from 'src/components/NameAddress'
-import { BaseContext } from 'src/context/BaseContext'
-import { getAddress } from 'ethers/lib/utils'
-
-import { useContext } from 'react'
 
 const BetCard = ({ data }) => {
   const { account } = useContext(BaseContext)

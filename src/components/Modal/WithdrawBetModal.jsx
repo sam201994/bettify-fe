@@ -1,9 +1,10 @@
+import { formatEther } from 'ethers/lib/utils'
+
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 import { useGame } from 'src/hooks'
 import CustomModal from './CustomModal'
 import { WithdrawBetWrapper } from './styles'
-import { formatEther } from 'ethers/lib/utils'
 
 const WithdrawBetModal = ({ showModal, setShowModal, data }) => {
   const { stakeAmount, guess, tokenId, proxyAddress, isWinner } = data

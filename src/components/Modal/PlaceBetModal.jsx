@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Button from 'src/components/Button'
-import CustomModal from './CustomModal'
-import { GuessInput } from 'src/components/FormFields'
-import { PlaceBetWrapper } from './styles'
-import { useGame, useGetBalances } from 'src/hooks'
-import { useContext } from 'react'
-import { BaseContext } from 'src/context/BaseContext'
 import { useFormik } from 'formik'
-import { extractNaturalNumber } from 'src/utils/web3Utils'
 import { useQueryClient } from 'react-query'
+
+import { GuessInput } from 'src/components/FormFields'
+import { useGame, useGetBalances } from 'src/hooks'
+import { BaseContext } from 'src/context/BaseContext'
+import { extractNaturalNumber } from 'src/utils/web3Utils'
+import CustomModal from './CustomModal'
+import { PlaceBetWrapper } from './styles'
 
 const PlaceBetModal = ({ showModal, setShowModal, data }) => {
   const { account } = useContext(BaseContext)

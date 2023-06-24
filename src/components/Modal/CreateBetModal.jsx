@@ -1,20 +1,17 @@
 import React, { useState } from 'react'
-import Dialog from '@mui/material/Dialog'
-import Image from 'next/image'
+import { useFormik } from 'formik'
+import { useQueryClient } from 'react-query'
+import { parseEther } from 'ethers/lib/utils'
 
-import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
+import { TextField } from 'src/components/FormFields'
+import { useFactoryContract } from 'src/hooks'
+import { extractNaturalNumber, extractDecimalNumber } from 'src/utils/web3Utils'
 import CustomModal from './CustomModal'
 import { CreateBetWrapper } from './styles'
-import { useFactoryContract } from 'src/hooks'
-import { parseEther } from 'ethers/lib/utils'
-import { TextField } from 'src/components/FormFields'
-import { useFormik } from 'formik'
-import { extractNaturalNumber, extractDecimalNumber } from 'src/utils/web3Utils'
-import { useQueryClient } from 'react-query'
 
 const CreateBetModal = ({ showModal, setShowModal, data }) => {
-  const { createBet, getAllEvents } = useFactoryContract(data.address)
+  const { createBet } = useFactoryContract(data.address)
   const [loading, setLoading] = useState(false)
   const queryClient = useQueryClient()
 
@@ -49,7 +46,7 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
         const lockInPeriodEnd =
           bettingExpiration + 60 * 60 * 24 * parseInt(values.lockinPeriod)
 
-        const proxyAddress = await createBet(
+        await createBet(
           bettingExpiration,
           lockInPeriodEnd,
           parseEther(values.stakeAmount),
@@ -72,7 +69,7 @@ const CreateBetModal = ({ showModal, setShowModal, data }) => {
       const num = extractDecimalNumber(value, 18)
       setFieldValue(name, num)
     } else {
-      setFieldValue(name, num)
+      setFieldValue(name, value)
     }
   }
 

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
-import { BaseContext } from 'src/context/BaseContext'
 import { ethers } from 'ethers'
+
+import { BaseContext } from 'src/context/BaseContext'
 
 const useContract = (address, abi) => {
   const { signer } = useContext(BaseContext)

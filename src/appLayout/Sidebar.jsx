@@ -1,12 +1,8 @@
 import Link from 'next/link'
 
-import {
-  SpaceDashboardIcon,
-  BorderColorIcon,
-  GamesIcon,
-} from 'src/components/Icons'
-import { SidebarWrapper, MenuWrapper, MenuItemWrapper } from './styles'
 import { colors } from 'src/utils/colors'
+import { SpaceDashboardIcon, GamesIcon } from 'src/components/Icons'
+import { SidebarWrapper, MenuWrapper, MenuItemWrapper } from './styles'
 
 const Sidebar = () => {
   const customStyles = {
@@ -27,7 +23,7 @@ const Sidebar = () => {
             <GamesIcon sx={customStyles} />
           </Link>
         </MenuItemWrapper>
-     {/*   <MenuItemWrapper>
+        {/*   <MenuItemWrapper>
           <Link href="/create">
             <BorderColorIcon sx={customStyles} />
           </Link>

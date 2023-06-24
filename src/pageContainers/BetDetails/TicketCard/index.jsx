@@ -1,10 +1,11 @@
+import { useContext } from 'react'
+import { getAddress } from 'ethers/lib/utils'
+
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
-import { TicketCardWrapper } from './styles'
 import { useModal } from 'src/hooks'
-import { useContext } from 'react'
 import { BaseContext } from 'src/context/BaseContext'
-import { getAddress } from 'ethers/lib/utils'
+import { TicketCardWrapper } from './styles'
 
 const TicketCard = ({
   data,

@@ -1,15 +1,9 @@
-import React, { useState } from 'react'
-import Dialog from '@mui/material/Dialog'
+import React from 'react'
 import Image from 'next/image'
+import styled from 'styled-components'
 
 import Typography from 'src/components/Typography'
-import Button from 'src/components/Button'
-import styled from 'styled-components'
-import {
-  getBetStatus,
-  formatWeiToDecimal,
-  getBetDateData,
-} from 'src/utils/web3Utils'
+import { formatWeiToDecimal } from 'src/utils/web3Utils'
 import { colors } from 'src/utils/colors'
 
 const InputWrapper = styled.div`

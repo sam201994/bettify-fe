@@ -1,4 +1,6 @@
 import { useState, useContext } from 'react'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 
 import { BaseContext } from 'src/context/BaseContext'
 import { colors } from 'src/utils/colors'
@@ -6,8 +8,6 @@ import { ExpandMoreIcon, ExpandLessIcon } from 'src/components/Icons'
 import Typography from 'src/components/Typography'
 import NameAddress from 'src/components/NameAddress'
 import { HeaderWrapper, ConnectWrapper } from './styles'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 
 const Header = () => {
   const { connect, connecting, account, disconnect, wallet } =

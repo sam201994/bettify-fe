@@ -13,3 +13,5 @@ export const FACTORY_CONTRACTS = {
       'Create bitcoin price guessing game. Enter the betting period, lockin period and let the game begin!',
   },
 }
+
+export const ALL_FACTORY_CONTRACTS = [BitcoinPriceBetFactoryContractAddress]

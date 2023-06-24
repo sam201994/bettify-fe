@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
-import Dialog from '@mui/material/Dialog'
-import Image from 'next/image'
+import React from 'react'
 
 import Typography from 'src/components/Typography'
 import Button from 'src/components/Button'
 import CustomModal from './CustomModal'
 import { DeclareWinnerWrapper } from './styles'
 
-const DeclareWinnerModal = ({ showModal, setShowModal, data }) => {
+const DeclareWinnerModal = ({ showModal, setShowModal }) => {
   return (
     <CustomModal
       showModal={showModal}

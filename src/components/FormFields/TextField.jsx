@@ -1,8 +1,8 @@
 import * as React from 'react'
-import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
-import { colors } from 'src/utils/colors'
 import { styled } from '@mui/material/styles'
+
+import { colors } from 'src/utils/colors'
 
 const CustomTextField = styled(TextField)({
   '& label.Mui-focused': {
